@@ -1,0 +1,17 @@
+.search {
+  position: relative;
+  &__input {
+    padding-left: 46px;
+    width: 250px;
+    height: 45px;
+    border: 1px solid #F3F3F3;
+    border-radius: 10px;
+  }
+  &__image {
+    max-width: 100%;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

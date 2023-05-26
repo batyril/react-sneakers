@@ -1,0 +1,17 @@
+.sneakers {
+  font-size: 14px;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  &__title {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+}

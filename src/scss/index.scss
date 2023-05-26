@@ -1,0 +1,63 @@
+@import "../components/Header/Header";
+
+* {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  img {
+    object-fit: cover;
+}
+}
+body {
+  position: relative;
+  padding: 85px;
+  background: #E7F6FF;
+}
+.content {
+  background-color: white;
+  padding: 45px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  border-radius: 0 0 20px 20px;
+}
+.banner {
+  img {
+    width: 100%;
+}
+}
+
+
+.buy-btn {
+  cursor: pointer;
+  position: relative;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 325px;
+  min-height: 55px;
+  background: #9DD558;
+  border-radius: 18px;
+  transition: background 0.3s ease-in-out;
+  &:hover {
+    background: rgb(148, 192, 94);
+    img {
+      transform: translateX(10px) translateY(-50%);
+  }
+}
+  &__text {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+}
+  &__arrow {
+    transition: transform 0.3s ease-in-out;
+    right: 15%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+}
