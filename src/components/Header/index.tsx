@@ -2,7 +2,13 @@ import sneakLogo from '../../img/sneaker-logo.svg';
 import account from '../../img/account.svg';
 import favorites from '../../img/favorites.svg';
 import store from '../../img/store.svg';
-function Header() {
+import React from 'react';
+
+interface HeaderType {
+  onClickCart: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Header({ onClickCart }: HeaderType) {
   return (
     <header className='header'>
       <div className='header__logo'>
@@ -14,7 +20,7 @@ function Header() {
       </div>
       <ul className='header__menu'>
         <li>
-          <img src={store} alt='store ' />
+          <img onClick={() => onClickCart(true)} src={store} alt='store ' />
           <span>1205 руб</span>
         </li>
         <li>

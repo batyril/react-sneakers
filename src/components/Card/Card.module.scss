@@ -38,6 +38,16 @@
     width: 32px;
     height: 32px;
 }
+  &__delete {
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #F2F2F2;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #89F09C 0%, #3CC755 100%);
+    width: 32px;
+    height: 32px;
+}
   &__price {
     span {
       font-weight: 700;

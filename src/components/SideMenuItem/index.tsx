@@ -1,18 +1,23 @@
-import sneakerIcon from '../../img/miniSneak.png';
 import deleteIcon from '../../img/favorite-delete.svg';
 import styles from './SideMenuItem.module.scss';
 
-function SideMenuItem() {
+interface SideMenuItem {
+  avatar: string;
+  name: string;
+  price: number;
+  onDeleteCart: () => void;
+}
+function SideMenuItem({ avatar, name, price, onDeleteCart }: SideMenuItem) {
   return (
     <div className={styles.card}>
       <div>
-        <img width='70px' height='70px' src={sneakerIcon} alt='' />
+        <img width='70px' height='70px' src={avatar} alt='' />
       </div>
       <div className={styles.card__body}>
-        <p>Мужские Кроссовки Nike Air Max 270</p>
-        <span>12 999 руб.</span>
+        <p>{name}</p>
+        <span>{price}</span>
       </div>
-      <button className={styles.card__delete}>
+      <button onClick={onDeleteCart} className={styles.card__delete}>
         <img src={deleteIcon} alt='delete' />
       </button>
     </div>

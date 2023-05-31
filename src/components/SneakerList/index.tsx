@@ -1,22 +1,44 @@
 import Search from '../Search';
 import Card from '../Card';
 import styles from './SneakerList.module.scss';
+import { useContext } from 'react';
+import { FormContext } from '../../context/FormContext.ts';
+import { ISneaker, sneakersType } from '../../../interfaces.ts';
 
-console.log(styles);
+interface SneakerListType {
+  sneakers: sneakersType;
+  addSideMenu: (obj: ISneaker) => void;
+  addFavorite: (obj: ISneaker) => void;
+}
 
-function SneakerList() {
+function SneakerList({ sneakers, addSideMenu, addFavorite }: SneakerListType) {
+  const { searchName } = useContext(FormContext);
+  //TODO: добавить обрезание после значения
   return (
     <div className={styles.sneakers}>
       <div className={styles.sneakers__top}>
-        <h3 className={styles.sneakers__title}>Все кроссовки</h3>
+        <h3 className={styles.sneakers__title}>
+          {searchName ? `Поиск по ${searchName}` : 'Все кроссовки'}
+        </h3>
         <Search></Search>
       </div>
       <div className={styles.sneakers__list}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {sneakers
+          .filter((item) =>
+            item.name.toLowerCase().includes(searchName.toLowerCase())
+          )
+          .map((sneaker) => {
+            return (
+              <Card
+                avatar={sneaker.avatar}
+                price={sneaker.price}
+                key={sneaker.id}
+                name={sneaker.name}
+                addSideMenu={() => addSideMenu(sneaker)}
+                addFavorite={() => addFavorite(sneaker)}
+              />
+            );
+          })}
       </div>
     </div>
   );
