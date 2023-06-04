@@ -29,7 +29,12 @@ function EmptyCart({ onClose }) {
   );
 }
 
-function FullCart({ sneakers, onDeleteCart }) {
+interface IFullCart {
+  sneakers: sneakersType;
+  onDeleteCart: (idl: string) => void;
+}
+
+function FullCart({ sneakers, onDeleteCart }: IFullCart) {
   return (
     <>
       <div className={styles.sideMenu__list}>

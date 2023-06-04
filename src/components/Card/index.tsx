@@ -1,45 +1,46 @@
 import plusIcon from '../../img/plus.svg';
-/*import favorite from '../../img/favorite.svg';*/
+import favorite from '../../img/favorite.svg';
 import noFavorite from '../../img/no-favorite.svg';
 import deleteCard from '../../img/deleteCart.svg';
 import styles from './Card.module.scss';
-
-function AddCart({ onAdd }) {
-  return (
-    <button onClick={onAdd} className={styles.card__buy}>
-      <img src={plusIcon} alt='plus' />
-    </button>
-  );
-}
-
-/*function DeleteCard({ onDelete }) {
-  return (
-    <button onClick={onDelete} className={styles.card__delete}>
-      <img src={deleteCard} alt='delete' />
-    </button>
-  );
-}*/
+import { useContext } from 'react';
+import { FormContext } from '../../context/FormContext.ts';
 
 interface CardProps {
   avatar: string;
   price: number;
   name: string;
+  id: string;
   addSideMenu: () => void;
   addFavorite: () => void;
 }
 
-function Card({ avatar, price, name, addSideMenu, addFavorite }: CardProps) {
+function Card({
+  avatar,
+  price,
+  name,
+  addSideMenu,
+  addFavorite,
+  id,
+}: CardProps) {
+  const { cartSneakers, favorites } = useContext(FormContext);
+  const inCart = cartSneakers.some((item) => item.id === id);
+  const isFavorite = favorites.some((item) => item.id === id);
   const onAddCart = () => {
     addSideMenu();
+  };
+
+  const onClickFavorite = () => {
+    addFavorite();
   };
 
   return (
     <div className={styles.card}>
       <div className={styles.card__body}>
         <img
-          onClick={addFavorite}
+          onClick={onClickFavorite}
           className={styles.card__favorite}
-          src={noFavorite}
+          src={isFavorite ? favorite : noFavorite}
           alt='favorite'
         />
         <img className={styles.card__image} src={avatar} alt='sneaker' />
@@ -50,12 +51,12 @@ function Card({ avatar, price, name, addSideMenu, addFavorite }: CardProps) {
           <p>Цена</p>
           <span>{price}</span>
         </div>
-        <AddCart onAdd={onAddCart} />
-        {/*        {isAdded ? (
-          <DeleteCard onDelete={onDeleteCart} />
-        ) : (
-          <AddCart onAdd={onAddCart} />
-        )}*/}
+        <button
+          onClick={onAddCart}
+          className={inCart ? styles.card__delete : styles.card__buy}
+        >
+          <img src={inCart ? deleteCard : plusIcon} alt='button' />
+        </button>
       </div>
     </div>
   );

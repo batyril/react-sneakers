@@ -30,10 +30,8 @@ function SneakerList({ sneakers, addSideMenu, addFavorite }: SneakerListType) {
           .map((sneaker) => {
             return (
               <Card
-                avatar={sneaker.avatar}
-                price={sneaker.price}
+                {...sneaker}
                 key={sneaker.id}
-                name={sneaker.name}
                 addSideMenu={() => addSideMenu(sneaker)}
                 addFavorite={() => addFavorite(sneaker)}
               />

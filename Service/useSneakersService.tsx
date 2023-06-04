@@ -4,10 +4,22 @@ import { ISneaker } from '../interfaces.ts';
 function useSneakersService() {
   const [request] = useHttp();
 
-  const apiBase = 'https://646fd4b309ff19b12087cd2e.mockapi.io/';
+  const apiBase = 'http://localhost:3000/';
+
+  const postFavorites = async (sneaker: ISneaker) => {
+    await request(`${apiBase}favorite`, 'POST', JSON.stringify(sneaker));
+  };
 
   const getSneakers = async () => {
     return await request(`${apiBase}sneakers`);
+  };
+
+  const getFavorites = async () => {
+    return await request(`${apiBase}favorite`);
+  };
+
+  const deleteFavorites = async (id: string) => {
+    return await request(`${apiBase}favorite/${id}`, 'DELETE');
   };
 
   const addCartSneaker = async (sneaker: ISneaker) => {
@@ -22,7 +34,15 @@ function useSneakersService() {
     return await request(`${apiBase}cart`);
   };
 
-  return { getSneakers, addCartSneaker, getCart, deleteCartSneaker };
+  return {
+    getSneakers,
+    addCartSneaker,
+    getCart,
+    deleteCartSneaker,
+    postFavorites,
+    getFavorites,
+    deleteFavorites,
+  };
 }
 
 export default useSneakersService;
