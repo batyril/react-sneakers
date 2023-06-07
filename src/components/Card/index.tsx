@@ -4,7 +4,7 @@ import noFavorite from '../../img/no-favorite.svg';
 import deleteCard from '../../img/deleteCart.svg';
 import styles from './Card.module.scss';
 import { useContext } from 'react';
-import { FormContext } from '../../context/FormContext.ts';
+import { AppContext } from '../../context/AppContext.ts';
 
 interface CardProps {
   avatar: string;
@@ -23,7 +23,7 @@ function Card({
   addFavorite,
   id,
 }: CardProps) {
-  const { cartSneakers, favorites } = useContext(FormContext);
+  const { cartSneakers, favorites } = useContext(AppContext);
   const inCart = cartSneakers.some((item) => item.id === id);
   const isFavorite = favorites.some((item) => item.id === id);
   const onAddCart = () => {

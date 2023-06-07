@@ -1,72 +1,39 @@
-import SideMenuItem from '../SideMenuItem';
-import arrow from '../../img/arrow.svg';
-import arrowBack from '../../img/arrow-back.svg';
 import deleteIcon from '../../img/favorite-delete.svg';
 import styles from './SideMenu.module.scss';
-import { sneakersType } from '../../../interfaces.ts';
-import React from 'react';
-import emptyIcon from '../../img/empty-cart.png';
+import { useContext, useState } from 'react';
+import { AppContext } from '../../context/AppContext.ts';
+import CartList from '../Carts/CartList.tsx';
+import InfoCart from '../Carts/CartInfo.tsx';
+import useSneakersService from '../../service/useSneakersService.tsx';
+import { customAlphabet } from 'nanoid';
+const nanoid = customAlphabet('1234567890abcdef', 4);
 
-interface ISideMenu {
-  sneakers: sneakersType;
-  onDeleteCart: (id: string) => void;
-  onClose: React.Dispatch<React.SetStateAction<boolean>>;
-}
+function SideMenu() {
+  const { addOrder } = useSneakersService();
+  const {
+    setSideMenuOpened: onClose,
+    cartSneakers,
+    onDeleteCart,
+    setCartSneakers,
+  } = useContext(AppContext);
+  const [isOrdered, setIsOrdered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [orderId, serOrderId] = useState('');
 
-function EmptyCart({ onClose }) {
-  return (
-    <div className={styles.emptyCart}>
-      <img width='120px' height='120px' src={emptyIcon} alt='empty cart' />
-      <h3 className={styles.emptyCart__title}>Корзина пустая</h3>
-      <p className={styles.emptyCart__text}>
-        Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-      </p>
-      <button onClick={onClose} className={styles.backBtn}>
-        <span className={styles.backBtn__text}> Вернуться назад </span>
-        <img className={styles.backBtn__arrow} src={arrowBack} alt='arrow' />
-      </button>
-    </div>
-  );
-}
+  const sendOrder = async () => {
+    try {
+      setIsLoading(true);
+      const res = await addOrder({ id: nanoid(), ...cartSneakers });
+      setIsOrdered(true);
+      setIsLoading(false);
+      setCartSneakers([]);
+      serOrderId(res.id);
+    } catch (e) {
+      setIsLoading(false);
+      console.log(e.message);
+    }
+  };
 
-interface IFullCart {
-  sneakers: sneakersType;
-  onDeleteCart: (idl: string) => void;
-}
-
-function FullCart({ sneakers, onDeleteCart }: IFullCart) {
-  return (
-    <>
-      <div className={styles.sideMenu__list}>
-        {sneakers.map((sneaker) => {
-          return (
-            <SideMenuItem
-              key={sneaker.id}
-              {...sneaker}
-              onDeleteCart={() => onDeleteCart(sneaker.id)}
-            />
-          );
-        })}
-      </div>
-      <div className={styles.total}>
-        <p className={styles.total__text}>Итого</p>
-        <div className={styles.total__border}></div>
-        <p className={styles.total__price}>21 498 руб. </p>
-      </div>
-      <div className={styles.total}>
-        <p className={styles.total__text}>Налог 5%: </p>
-        <div className={styles.total__border}></div>
-        <p className={styles.total__price}>1074 руб. </p>
-      </div>
-      <button className='side-menu__buy buy-btn'>
-        <span className='buy-btn__text'>Оформить заказ </span>
-        <img className='buy-btn__arrow' src={arrow} alt='arrow' />
-      </button>
-    </>
-  );
-}
-
-function SideMenu({ onClose, sneakers, onDeleteCart }: ISideMenu) {
   return (
     <div className={styles.overlay}>
       <div className={styles.sideMenu}>
@@ -77,10 +44,20 @@ function SideMenu({ onClose, sneakers, onDeleteCart }: ISideMenu) {
         >
           <img src={deleteIcon} alt='delete' />
         </button>
-        {sneakers.length !== 0 ? (
-          <FullCart sneakers={sneakers} onDeleteCart={onDeleteCart} />
+        {cartSneakers.length !== 0 && !isOrdered ? (
+          <CartList
+            onOrdered={() => {
+              sendOrder();
+            }}
+            sneakers={cartSneakers}
+            onDeleteCart={onDeleteCart}
+          />
         ) : (
-          <EmptyCart onClose={() => onClose(false)} />
+          <InfoCart
+            orderId={orderId}
+            isOrdered={isOrdered}
+            onClose={() => onClose(false)}
+          />
         )}
       </div>
     </div>

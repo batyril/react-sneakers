@@ -1,5 +1,5 @@
-import useHttp from '../src/hooks/http.hook';
-import { ISneaker } from '../interfaces.ts';
+import useHttp from '../hooks/http.hook.ts';
+import { ISneaker } from '../../interfaces.ts';
 
 function useSneakersService() {
   const [request] = useHttp();
@@ -26,6 +26,10 @@ function useSneakersService() {
     return await request(`${apiBase}cart`, 'POST', JSON.stringify(sneaker));
   };
 
+  const addOrder = async (order) => {
+    return await request(`${apiBase}orders`, 'POST', JSON.stringify(order));
+  };
+
   const deleteCartSneaker = async (id: string) => {
     return await request(`${apiBase}cart/${id}`, 'DELETE');
   };
@@ -42,6 +46,7 @@ function useSneakersService() {
     postFavorites,
     getFavorites,
     deleteFavorites,
+    addOrder,
   };
 }
 

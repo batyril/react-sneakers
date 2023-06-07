@@ -3,7 +3,8 @@ import { Home } from '../../pages/Home.tsx';
 import { Favorites } from '../../pages/Favorites.tsx';
 import { useEffect, useState } from 'react';
 import { ISneaker, sneakersType } from '../../../interfaces.ts';
-import useSneakersService from '../../../Service/useSneakersService.tsx';
+import { AppContext } from '../../context/AppContext.ts';
+import useSneakersService from '../../service/useSneakersService.tsx';
 
 function App() {
   const [sideMenuOpened, setSideMenuOpened] = useState(false);
@@ -11,6 +12,7 @@ function App() {
   const [allSneakers, setAllSneakers] = useState<sneakersType | []>([]);
   const [favorites, setFavorites] = useState<sneakersType | []>([]);
   const [searchName, setSearchName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const {
     getFavorites,
     getSneakers,
@@ -49,45 +51,44 @@ function App() {
   };
 
   useEffect(() => {
-    getCart().then((res) => setCartSneakers(res));
-    getFavorites().then((res) => setFavorites(res));
-    getSneakers().then((res) => setAllSneakers(res));
+    const fetchData = async () => {
+      setIsLoading(true);
+      const cartRes = await getCart();
+      const favoritesRes = await getFavorites();
+      const sneakersRes = await getSneakers();
+
+      setCartSneakers(cartRes);
+      setFavorites(favoritesRes);
+      setAllSneakers(sneakersRes);
+
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, []);
 
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={
-          <Home
-            favorites={favorites}
-            setSideMenuOpened={setSideMenuOpened}
-            allSneakers={allSneakers}
-            searchName={searchName}
-            cartSneakers={cartSneakers}
-            sideMenuOpened={sideMenuOpened}
-            onDeleteCart={onDeleteCart}
-            onAddCart={onAddCart}
-            onAddFavorite={onAddFavorite}
-            setSearchName={setSearchName}
-          />
-        }
-      ></Route>
-      <Route
-        path='/favorite'
-        element={
-          <Favorites
-            onAddFavorite={onAddFavorite}
-            onAddCart={onAddCart}
-            items={favorites}
-            sideMenuOpened={sideMenuOpened}
-            setSideMenuOpened={setSideMenuOpened}
-            onDeleteCart={onDeleteCart}
-            cartSneakers={cartSneakers}
-          />
-        }
-      ></Route>
-    </Routes>
+    <AppContext.Provider
+      value={{
+        searchName,
+        setSearchName,
+        cartSneakers,
+        favorites,
+        onDeleteCart,
+        allSneakers,
+        isLoading,
+        onAddCart,
+        onAddFavorite,
+        setSideMenuOpened,
+        sideMenuOpened,
+        setCartSneakers,
+      }}
+    >
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/favorite' element={<Favorites />}></Route>
+      </Routes>
+    </AppContext.Provider>
   );
 }
 

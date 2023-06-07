@@ -2,13 +2,12 @@ import sneakLogo from '../../img/sneaker-logo.svg';
 import account from '../../img/account.svg';
 import favorites from '../../img/favorites.svg';
 import store from '../../img/store.svg';
-import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-interface HeaderType {
-  onClickCart: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { AppContext } from '../../context/AppContext.ts';
 
-function Header({ onClickCart }: HeaderType) {
+function Header() {
+  const { setSideMenuOpened: onOpen } = useContext(AppContext);
   return (
     <header className='header'>
       <div className='header__logo'>
@@ -23,7 +22,7 @@ function Header({ onClickCart }: HeaderType) {
       </div>
       <ul className='header__menu'>
         <li>
-          <img onClick={() => onClickCart(true)} src={store} alt='store ' />
+          <img onClick={() => onOpen(true)} src={store} alt='store ' />
           <span>1205 руб</span>
         </li>
         <li>

@@ -2,17 +2,32 @@ import Search from '../Search';
 import Card from '../Card';
 import styles from './SneakerList.module.scss';
 import { useContext } from 'react';
-import { FormContext } from '../../context/FormContext.ts';
-import { ISneaker, sneakersType } from '../../../interfaces.ts';
+import { AppContext } from '../../context/AppContext.ts';
+import { Skeleton } from '../Skeleton';
 
-interface SneakerListType {
-  sneakers: sneakersType;
-  addSideMenu: (obj: ISneaker) => void;
-  addFavorite: (obj: ISneaker) => void;
-}
+function SneakerList({ sneakers }) {
+  const { searchName, isLoading, onAddFavorite, onAddCart } =
+    useContext(AppContext);
+  const renderItem = () => {
+    if (isLoading) {
+      return [...Array(10)].map((_, index) => <Skeleton key={index} />);
+    }
 
-function SneakerList({ sneakers, addSideMenu, addFavorite }: SneakerListType) {
-  const { searchName } = useContext(FormContext);
+    return sneakers
+      .filter((item) =>
+        item.name.toLowerCase().includes(searchName.toLowerCase())
+      )
+      .map((sneaker) => {
+        return (
+          <Card
+            {...sneaker}
+            key={sneaker.id}
+            addSideMenu={() => onAddCart(sneaker)}
+            addFavorite={() => onAddFavorite(sneaker)}
+          />
+        );
+      });
+  };
   //TODO: добавить обрезание после значения
   return (
     <div className={styles.sneakers}>
@@ -22,22 +37,7 @@ function SneakerList({ sneakers, addSideMenu, addFavorite }: SneakerListType) {
         </h3>
         <Search></Search>
       </div>
-      <div className={styles.sneakers__list}>
-        {sneakers
-          .filter((item) =>
-            item.name.toLowerCase().includes(searchName.toLowerCase())
-          )
-          .map((sneaker) => {
-            return (
-              <Card
-                {...sneaker}
-                key={sneaker.id}
-                addSideMenu={() => addSideMenu(sneaker)}
-                addFavorite={() => addFavorite(sneaker)}
-              />
-            );
-          })}
-      </div>
+      <div className={styles.sneakers__list}>{renderItem()}</div>
     </div>
   );
 }

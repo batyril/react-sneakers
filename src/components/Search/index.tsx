@@ -1,11 +1,11 @@
 import searchIcon from '../../img/search.svg';
 import styles from './Search.module.scss';
 import { useContext } from 'react';
-import { FormContext } from '../../context/FormContext.ts';
+import { AppContext } from '../../context/AppContext.ts';
 import deleteIcon from '../../img/favorite-delete.svg';
 
 function Search() {
-  const { searchName, setSearchName } = useContext(FormContext);
+  const { searchName, setSearchName } = useContext(AppContext);
 
   const onClear = () => {
     if (setSearchName) {
