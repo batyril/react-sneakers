@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext.ts';
 
 function Header() {
-  const { setSideMenuOpened: onOpen } = useContext(AppContext);
+  const { setSideMenuOpened: onOpen, finalPrice } = useContext(AppContext);
+
   return (
     <header className='header'>
       <div className='header__logo'>
@@ -23,10 +24,12 @@ function Header() {
       <ul className='header__menu'>
         <li>
           <img onClick={() => onOpen(true)} src={store} alt='store ' />
-          <span>1205 руб</span>
+          <span>{finalPrice} ₽</span>
         </li>
         <li>
-          <img src={account} alt='account' />
+          <Link to='/orders'>
+            <img src={account} alt='account' />
+          </Link>
         </li>
         <li>
           <Link to='/favorite'>

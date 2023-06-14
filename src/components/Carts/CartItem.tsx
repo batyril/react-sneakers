@@ -1,13 +1,18 @@
 import deleteIcon from '../../img/favorite-delete.svg';
-import styles from './SideMenuItem.module.scss';
+import styles from './CartItem.module.scss';
 
-interface SideMenuItem {
+interface ICartItem {
   avatar: string;
   name: string;
   price: number;
   onDeleteCart: () => void;
 }
-function SideMenuItem({ avatar, name, price, onDeleteCart }: SideMenuItem) {
+export default function CartItem({
+  avatar,
+  name,
+  price,
+  onDeleteCart,
+}: ICartItem) {
   return (
     <div className={styles.card}>
       <div>
@@ -23,5 +28,3 @@ function SideMenuItem({ avatar, name, price, onDeleteCart }: SideMenuItem) {
     </div>
   );
 }
-
-export default SideMenuItem;

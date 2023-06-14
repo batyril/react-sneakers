@@ -14,6 +14,7 @@ interface IAppContext {
   sideMenuOpened: boolean;
   setSideMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
   setCartSneakers: React.Dispatch<React.SetStateAction<sneakersType | []>>;
+  finalPrice: number;
 }
 
 const defaultContext: IAppContext = {

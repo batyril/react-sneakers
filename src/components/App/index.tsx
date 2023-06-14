@@ -1,10 +1,15 @@
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import { Home } from '../../pages/Home.tsx';
 import { Favorites } from '../../pages/Favorites.tsx';
-import { useEffect, useState } from 'react';
-import { ISneaker, sneakersType } from '../../../interfaces.ts';
+import { Orders } from '../../pages/Orders.tsx';
+
 import { AppContext } from '../../context/AppContext.ts';
 import useSneakersService from '../../service/useSneakersService.tsx';
+import useFinalPrice from '../../hooks/useFinalPrice.ts';
+
+import { ISneaker, sneakersType } from '../../../interfaces.ts';
 
 function App() {
   const [sideMenuOpened, setSideMenuOpened] = useState(false);
@@ -13,6 +18,8 @@ function App() {
   const [favorites, setFavorites] = useState<sneakersType | []>([]);
   const [searchName, setSearchName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const finalPrice: number = useFinalPrice(cartSneakers);
+
   const {
     getFavorites,
     getSneakers,
@@ -33,15 +40,13 @@ function App() {
   };
 
   //TODO: переделать под Immer
-  //TODO: сделать поиск дубликатов
   const onAddCart = (obj: ISneaker) => {
     if (cartSneakers.some((item) => item.id === obj.id)) {
       deleteCartSneaker(obj.id);
       setCartSneakers((prev) => prev.filter((item) => item.id !== obj.id));
     } else {
-      addCartSneaker(obj).then(() => {
-        setCartSneakers((prev) => [...prev, obj]);
-      });
+      addCartSneaker(obj);
+      setCartSneakers((prev) => [...prev, obj]);
     }
   };
 
@@ -52,6 +57,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      //TODO: переписать под promise all
       setIsLoading(true);
       const cartRes = await getCart();
       const favoritesRes = await getFavorites();
@@ -82,11 +88,26 @@ function App() {
         setSideMenuOpened,
         sideMenuOpened,
         setCartSneakers,
+        finalPrice,
       }}
     >
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/favorite' element={<Favorites />}></Route>
+        <Route
+          path='/'
+          element={
+            <Home allSneakers={allSneakers} sideMenuOpened={sideMenuOpened} />
+          }
+        ></Route>
+        <Route
+          path='/favorite'
+          element={
+            <Favorites favorites={favorites} sideMenuOpened={sideMenuOpened} />
+          }
+        ></Route>
+        <Route
+          path='/orders'
+          element={<Orders sideMenuOpened={sideMenuOpened} />}
+        ></Route>
       </Routes>
     </AppContext.Provider>
   );

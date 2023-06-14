@@ -38,6 +38,16 @@ function useSneakersService() {
     return await request(`${apiBase}cart`);
   };
 
+  const getOrders = async () => {
+    return await request(`${apiBase}orders`);
+  };
+  const clearCart = async () => {
+    const carts = await request(`${apiBase}cart`);
+    carts.forEach((item: ISneaker) =>
+      request(`${apiBase}cart/${item.id}`, 'DELETE')
+    );
+  };
+
   return {
     getSneakers,
     addCartSneaker,
@@ -47,6 +57,8 @@ function useSneakersService() {
     getFavorites,
     deleteFavorites,
     addOrder,
+    clearCart,
+    getOrders,
   };
 }
 

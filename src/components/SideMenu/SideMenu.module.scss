@@ -21,6 +21,7 @@
   right: 0;
   background: #FFFFFF;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  gap: 15px;
   &__title {
     font-size: 24px;
     line-height: 29px;
@@ -94,35 +95,3 @@
   }
 }
 
-.backBtn{
-    cursor: pointer;
-    position: relative;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 325px;
-    min-height: 55px;
-    background: #9DD558;
-    border-radius: 18px;
-    transition: background 0.3s ease-in-out;
-    &:hover {
-      background: rgb(148, 192, 94);
-      img {
-        transform:  translateY(-50%),  translateX(-50%);
-      }
-    }
-    &__text {
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 19px;
-    }
-    &__arrow {
-      transition: transform 0.3s ease-in-out;
-      left: 15%;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-}

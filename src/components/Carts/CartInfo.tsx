@@ -2,7 +2,7 @@ import styles from '../SideMenu/SideMenu.module.scss';
 import emptyIcon from '../../img/empty-cart.png';
 import arrowBack from '../../img/arrow-back.svg';
 import orderedImage from '../../img/ordered.png';
-
+import buttons from '../../scss/buttons.module.scss';
 interface ICartInfo {
   onClose: () => void;
   isOrdered: boolean;
@@ -25,9 +25,9 @@ export default function CartInfo({ onClose, isOrdered, orderId }: ICartInfo) {
           ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке`
           : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'}
       </p>
-      <button onClick={onClose} className={styles.backBtn}>
-        <span className={styles.backBtn__text}> Вернуться назад </span>
-        <img className={styles.backBtn__arrow} src={arrowBack} alt='arrow' />
+      <button onClick={onClose} className={buttons.button}>
+        <span className={buttons.button__text}> Вернуться назад </span>
+        <img className={buttons.back__arrow} src={arrowBack} alt='arrow' />
       </button>
     </div>
   );

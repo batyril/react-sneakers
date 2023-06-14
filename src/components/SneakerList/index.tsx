@@ -1,11 +1,17 @@
 import Search from '../Search';
-import Card from '../Card';
+import CardItem from '../CardItem';
 import styles from './SneakerList.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 import { Skeleton } from '../Skeleton';
+import { sneakersType } from '../../../interfaces.ts';
 
-function SneakerList({ sneakers }) {
+interface ISneakerList {
+  title: string;
+  sneakers: sneakersType;
+}
+
+function SneakerList({ title, sneakers }: ISneakerList) {
   const { searchName, isLoading, onAddFavorite, onAddCart } =
     useContext(AppContext);
   const renderItem = () => {
@@ -19,10 +25,12 @@ function SneakerList({ sneakers }) {
       )
       .map((sneaker) => {
         return (
-          <Card
+          <CardItem
             {...sneaker}
             key={sneaker.id}
-            addSideMenu={() => onAddCart(sneaker)}
+            addSideMenu={() => {
+              onAddCart(sneaker);
+            }}
             addFavorite={() => onAddFavorite(sneaker)}
           />
         );
@@ -33,7 +41,7 @@ function SneakerList({ sneakers }) {
     <div className={styles.sneakers}>
       <div className={styles.sneakers__top}>
         <h3 className={styles.sneakers__title}>
-          {searchName ? `Поиск по ${searchName}` : 'Все кроссовки'}
+          {searchName ? `Поиск по ${searchName}` : title}
         </h3>
         <Search></Search>
       </div>

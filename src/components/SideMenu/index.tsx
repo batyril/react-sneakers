@@ -9,7 +9,7 @@ import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('1234567890abcdef', 4);
 
 function SideMenu() {
-  const { addOrder } = useSneakersService();
+  const { addOrder, clearCart } = useSneakersService();
   const {
     setSideMenuOpened: onClose,
     cartSneakers,
@@ -23,11 +23,12 @@ function SideMenu() {
   const sendOrder = async () => {
     try {
       setIsLoading(true);
-      const res = await addOrder({ id: nanoid(), ...cartSneakers });
+      const res = await addOrder({ id: nanoid(), item: cartSneakers });
       setIsOrdered(true);
       setIsLoading(false);
       setCartSneakers([]);
       serOrderId(res.id);
+      await clearCart();
     } catch (e) {
       setIsLoading(false);
       console.log(e.message);
@@ -46,6 +47,7 @@ function SideMenu() {
         </button>
         {cartSneakers.length !== 0 && !isOrdered ? (
           <CartList
+            isLoading={isLoading}
             onOrdered={() => {
               sendOrder();
             }}

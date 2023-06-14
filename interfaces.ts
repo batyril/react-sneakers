@@ -6,3 +6,7 @@ export interface ISneaker {
   avatar: string;
   id: string;
 }
+export interface IOrders {
+  id: number;
+  item: ISneaker[];
+}
