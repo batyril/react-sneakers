@@ -1,0 +1,45 @@
+.button{
+
+  cursor: pointer;
+  position: relative;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 325px;
+  min-height: 55px;
+  background: #9DD558;
+  border-radius: 18px;
+  transition: background 0.3s ease-in-out;
+  &:hover {
+    background: rgb(148, 192, 94);
+    img{
+      transform: translateY(-50%) translateX(-50%);
+    }
+  }
+  &:disabled{
+    cursor: default;
+    background: rgb(152, 161, 141);
+  }
+  &__text {
+
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+  }
+  .back__arrow,.buy__arrow  {
+    transition: transform 0.3s ease-in-out;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .back__arrow {
+    left: 15%;
+  }
+  .buy__arrow {
+    right: 15%;
+  }
+
+}
+

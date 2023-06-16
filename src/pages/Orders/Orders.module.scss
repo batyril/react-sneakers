@@ -1,0 +1,17 @@
+.orders{
+  &__title{
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  &__id{
+    margin-bottom: 15px;
+  }
+  &__sneakers{
+    display: flex;
+    gap: 20px;
+  }
+  &__item{
+    margin-bottom: 15px;
+  }
+}
