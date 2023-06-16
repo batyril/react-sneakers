@@ -6,20 +6,21 @@ import CardItem from '../../components/CardItem';
 import { Skeleton } from '../../components/Skeleton';
 import { Blank } from '../../components/Blank';
 
-import useSneakersService from '../../service/useSneakersService.tsx';
-import { IOrders, ISneaker } from '../../../interfaces.ts';
+import { IOrders, ISneaker } from '../../const/interfaces.ts';
 
 import style from './Orders.module.scss';
+
+import axios from 'axios';
+import { URLS } from '../../const/urls.ts';
 
 export function Orders() {
   const [items, setItems] = useState<IOrders[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { getOrders } = useSneakersService();
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      const data = await getOrders();
-      setItems(data);
+      const response = await axios.get(String(URLS.ORDERS));
+      setItems(response.data);
       setIsLoading(false);
     })();
   }, []);

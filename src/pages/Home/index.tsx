@@ -2,8 +2,13 @@ import SideMenu from '../../components/SideMenu';
 import Header from '../../components/Header';
 import Slider from '../../components/Slider';
 import SneakersList from '../../components/SneakerList';
+import { SneakersType } from '../../const/interfaces.ts';
 
-export function Home({ allSneakers }) {
+interface IHome {
+  allSneakers: SneakersType | [];
+}
+
+export function Home({ allSneakers }: IHome) {
   const title = 'Все кроссовки';
   return (
     <>

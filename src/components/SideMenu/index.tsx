@@ -4,12 +4,12 @@ import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 import CartList from '../Carts/CartList.tsx';
 import InfoCart from '../Carts/CartInfo.tsx';
-import useSneakersService from '../../service/useSneakersService.tsx';
 import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('1234567890abcdef', 4);
-
+import axios from 'axios';
+import { URLS } from '../../const/urls.ts';
+import { ISneaker } from '../../const/interfaces.ts';
 function SideMenu() {
-  const { addOrder, clearCart } = useSneakersService();
   const {
     setSideMenuOpened: onClose,
     cartSneakers,
@@ -21,14 +21,25 @@ function SideMenu() {
   const [isLoading, setIsLoading] = useState(false);
   const [orderId, serOrderId] = useState('');
 
+  const clearCart = async () => {
+    const carts = await axios.get(String(URLS.CART));
+    carts.data.forEach((item: ISneaker) =>
+      axios.delete(String(new URL(`cart/${item.id}`, URLS.CART)))
+    );
+  };
+
   const sendOrder = async () => {
     try {
       setIsLoading(true);
-      const res = await addOrder({ id: Number(nanoid()), item: cartSneakers });
+      const res = await axios.post(String(URLS.ORDERS), {
+        id: Number(nanoid()),
+        item: cartSneakers,
+      });
       setIsOrdered(true);
       setIsLoading(false);
       setCartSneakers([]);
-      serOrderId(res.id);
+      serOrderId(res.data.id);
+
       await clearCart();
     } catch (e) {
       setIsLoading(false);
