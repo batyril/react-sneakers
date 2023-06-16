@@ -2,8 +2,13 @@ import Header from '../../components/Header';
 import SideMenu from '../../components/SideMenu';
 import SneakersList from '../../components/SneakerList';
 import { Blank } from '../../components/Blank';
+import { SneakersType } from '../../const/interfaces.ts';
 
-export function Favorites({ favorites }) {
+interface IFavorites {
+  favorites: SneakersType | [];
+}
+
+export function Favorites({ favorites }: IFavorites) {
   const title = 'Мои избранные';
   return (
     <>

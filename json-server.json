@@ -62,7 +62,20 @@
     }
   ],
   "cart": [],
-  "favorite": [],
+  "favorite": [
+    {
+      "price": 12999,
+      "name": "Nike Blazer Low '77 Vintage",
+      "avatar": "./src/img/sneakers/Nike Blazer Low '77 Vintage.webp",
+      "id": "1"
+    },
+    {
+      "price": 13299,
+      "name": "Nike Dunk Low",
+      "avatar": "./src/img/sneakers/Nike Dunk Low.webp",
+      "id": "2"
+    }
+  ],
   "orders": [
     {
       "id": 8029,
@@ -84,6 +97,92 @@
           "name": "Air Jordan 1 Low G",
           "avatar": "./src/img/sneakers/Air Jordan 1 Low G.webp",
           "id": "4"
+        }
+      ]
+    },
+    {
+      "id": 8030,
+      "item": [
+        {
+          "price": 13299,
+          "name": "Nike Dunk Low",
+          "avatar": "./src/img/sneakers/Nike Dunk Low.webp",
+          "id": "2"
+        },
+        {
+          "price": 9699,
+          "name": "Air Jordan 1 Low G",
+          "avatar": "./src/img/sneakers/Air Jordan 1 Low G.webp",
+          "id": "4"
+        }
+      ]
+    },
+    {
+      "id": 8031,
+      "item": [
+        {
+          "price": 8499,
+          "name": "Nike Killshot 2 Leather",
+          "avatar": "./src/img/sneakers/Nike Killshot 2 Leather.webp",
+          "id": "3"
+        },
+        {
+          "price": 9699,
+          "name": "Air Jordan 1 Low G",
+          "avatar": "./src/img/sneakers/Air Jordan 1 Low G.webp",
+          "id": "4"
+        },
+        {
+          "price": 13299,
+          "name": "Air Jordan 1 Mid",
+          "avatar": "./src/img/sneakers/Air Jordan 1 Mid.webp",
+          "id": "5"
+        }
+      ]
+    },
+    {
+      "id": 8032,
+      "item": [
+        {
+          "price": 13299,
+          "name": "Nike Blazer Mid '77 Vintage",
+          "avatar": "./src/img/sneakers/Nike Blazer Mid '77 Vintage.webp",
+          "id": "9"
+        },
+        {
+          "price": 13299,
+          "name": "Nike Dunk High Retro",
+          "avatar": "./src/img/sneakers/Nike Dunk High Retro.webp",
+          "id": "10"
+        },
+        {
+          "price": 13299,
+          "name": "Nike Air Max 270",
+          "avatar": "./src/img/sneakers/Nike Air Max 270.webp",
+          "id": "6"
+        }
+      ]
+    },
+    {
+      "id": 8033,
+      "item": [
+        {
+          "price": 13299,
+          "name": "Nike Dunk Low",
+          "avatar": "./src/img/sneakers/Nike Dunk Low.webp",
+          "id": "2"
+        },
+        {
+          "price": 8499,
+          "name": "Nike Killshot 2 Leather",
+          "avatar": "./src/img/sneakers/Nike Killshot 2 Leather.webp",
+          "id": "3"
+        },
+        {
+          "price": 13299,
+          "name": "Nike Air Max 270",
+          "avatar": "./src/img/sneakers/Nike Air Max 270.webp",
+          "id": "6"
         }
       ]
     }

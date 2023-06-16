@@ -1,7 +1,7 @@
 import styles from '../SideMenu/SideMenu.module.scss';
 import CartItem from './CartItem.tsx';
 import arrow from '../../img/arrow.svg';
-import { SneakersType } from '../../../interfaces.ts';
+import { SneakersType } from '../../const/interfaces.ts';
 import buttons from '../../scss/buttons.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';

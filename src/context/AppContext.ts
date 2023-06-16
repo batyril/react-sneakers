@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { ISneaker, SneakersType } from '../../interfaces.ts';
+import { ISneaker, SneakersType } from '../const/interfaces.ts';
 
 interface IAppContext {
   searchName: string;

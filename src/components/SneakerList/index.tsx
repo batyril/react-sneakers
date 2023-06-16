@@ -4,7 +4,7 @@ import styles from './SneakerList.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 import { Skeleton } from '../Skeleton';
-import { SneakersType } from '../../../interfaces.ts';
+import { SneakersType } from '../../const/interfaces.ts';
 import { getCroppedString } from '../../helpers/getСroppedString.ts';
 
 interface ISneakerList {
