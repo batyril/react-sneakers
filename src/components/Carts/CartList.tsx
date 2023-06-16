@@ -1,12 +1,12 @@
 import styles from '../SideMenu/SideMenu.module.scss';
 import CartItem from './CartItem.tsx';
 import arrow from '../../img/arrow.svg';
-import { sneakersType } from '../../../interfaces.ts';
+import { SneakersType } from '../../../interfaces.ts';
 import buttons from '../../scss/buttons.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 interface ICartList {
-  sneakers: sneakersType;
+  sneakers: SneakersType;
   onDeleteCart: (idl: string) => void;
   onOrdered: () => void;
   isLoading: boolean;
@@ -48,7 +48,7 @@ export default function CartList({
         className={buttons.button}
       >
         <span className={buttons.button__text}>Оформить заказ </span>
-        //TODO: добавить анимацию покупки
+        {/*TODO: добавить анимацию покупки*/}
         <img className={buttons.buy__arrow} src={arrow} alt='arrow' />
       </button>
     </>

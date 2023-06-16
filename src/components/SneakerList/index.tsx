@@ -4,11 +4,12 @@ import styles from './SneakerList.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 import { Skeleton } from '../Skeleton';
-import { sneakersType } from '../../../interfaces.ts';
+import { SneakersType } from '../../../interfaces.ts';
+import { getCroppedString } from '../../helpers/getСroppedString.ts';
 
 interface ISneakerList {
   title: string;
-  sneakers: sneakersType;
+  sneakers: SneakersType;
 }
 
 function SneakerList({ title, sneakers }: ISneakerList) {
@@ -36,12 +37,11 @@ function SneakerList({ title, sneakers }: ISneakerList) {
         );
       });
   };
-  //TODO: добавить обрезание после значения
   return (
     <div className={styles.sneakers}>
       <div className={styles.sneakers__top}>
         <h3 className={styles.sneakers__title}>
-          {searchName ? `Поиск по ${searchName}` : title}
+          {searchName ? `Поиск по ${getCroppedString(searchName)}` : title}
         </h3>
         <Search></Search>
       </div>

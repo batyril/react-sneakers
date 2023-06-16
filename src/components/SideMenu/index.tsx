@@ -15,6 +15,7 @@ function SideMenu() {
     cartSneakers,
     onDeleteCart,
     setCartSneakers,
+    sideMenuOpened,
   } = useContext(AppContext);
   const [isOrdered, setIsOrdered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +24,7 @@ function SideMenu() {
   const sendOrder = async () => {
     try {
       setIsLoading(true);
-      const res = await addOrder({ id: nanoid(), item: cartSneakers });
+      const res = await addOrder({ id: Number(nanoid()), item: cartSneakers });
       setIsOrdered(true);
       setIsLoading(false);
       setCartSneakers([]);
@@ -36,7 +37,11 @@ function SideMenu() {
   };
 
   return (
-    <div className={styles.overlay}>
+    <div
+      className={`${styles.overlay} ${
+        sideMenuOpened ? styles.overlay__visible : ''
+      } `}
+    >
       <div className={styles.sideMenu}>
         <h3 className={styles.sideMenu__title}>Корзина </h3>
         <button

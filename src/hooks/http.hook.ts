@@ -1,8 +1,10 @@
+import { RequestFunction } from '../../interfaces.ts';
+
 function useHttp() {
-  const request = async (
-    url: string,
+  const request: RequestFunction = async (
+    url,
     method = 'GET',
-    body: null | string = null,
+    body = null,
     headers = { 'Content-Type': 'application/json' }
   ) => {
     try {
@@ -12,14 +14,13 @@ function useHttp() {
         throw new Error(`status:${response.status}`);
       }
 
-      const data = await response.json();
-
-      return data;
-    } catch (e) {
-      throw e;
+      return await response.json();
+    } catch (error) {
+      console.error('Произошла ошибка:', error);
+      throw error;
     }
   };
-  return [request];
+  return { request };
 }
 
 export default useHttp;

@@ -1,6 +1,6 @@
 import plusIcon from '../../img/plus.svg';
-import favorite from '../../img/favorite.svg';
-import noFavorite from '../../img/no-favorite.svg';
+import addFavoriteIcon from '../../img/add-favorites.svg';
+import deleteFavorite from '../../img/delete-favorite.svg';
 import deleteCard from '../../img/deleteCart.svg';
 import styles from './CardItem.module.scss';
 import { useContext } from 'react';
@@ -31,12 +31,12 @@ export default function CardItem({
     <div className={styles.card}>
       <div className={styles.card__body}>
         {addSideMenu && (
-          <img
-            onClick={addFavorite}
-            className={styles.card__favorite}
-            src={isFavorite ? favorite : noFavorite}
-            alt='favorite'
-          />
+          <button onClick={addFavorite} className={styles.card__favorite}>
+            <img
+              src={isFavorite ? deleteFavorite : addFavoriteIcon}
+              alt='favorite'
+            />
+          </button>
         )}
 
         <img className={styles.card__image} src={avatar} alt='sneaker' />

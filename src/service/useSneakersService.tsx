@@ -1,45 +1,45 @@
 import useHttp from '../hooks/http.hook.ts';
-import { ISneaker } from '../../interfaces.ts';
+import { IOrders, ISneaker } from '../../interfaces.ts';
 
 function useSneakersService() {
-  const [request] = useHttp();
+  const { request } = useHttp();
 
-  const apiBase = 'http://localhost:3000/';
+  const apiBase = ' http://localhost:3000/';
 
-  const postFavorites = async (sneaker: ISneaker) => {
-    await request(`${apiBase}favorite`, 'POST', JSON.stringify(sneaker));
+  const postFavorites = (sneaker: ISneaker) => {
+    return request(`${apiBase}favorite`, 'POST', JSON.stringify(sneaker));
   };
 
-  const getSneakers = async () => {
-    return await request(`${apiBase}sneakers`);
+  const getSneakers = () => {
+    return request(`${apiBase}sneakers`);
   };
 
-  const getFavorites = async () => {
-    return await request(`${apiBase}favorite`);
+  const getFavorites = () => {
+    return request(`${apiBase}favorite`);
   };
 
-  const deleteFavorites = async (id: string) => {
-    return await request(`${apiBase}favorite/${id}`, 'DELETE');
+  const deleteFavorites = (id: string) => {
+    return request(`${apiBase}favorite/${id}`, 'DELETE');
   };
 
-  const addCartSneaker = async (sneaker: ISneaker) => {
-    return await request(`${apiBase}cart`, 'POST', JSON.stringify(sneaker));
+  const addCartSneaker = (sneaker: ISneaker) => {
+    return request(`${apiBase}cart`, 'POST', JSON.stringify(sneaker));
   };
 
-  const addOrder = async (order) => {
-    return await request(`${apiBase}orders`, 'POST', JSON.stringify(order));
+  const addOrder = (order: IOrders) => {
+    return request(`${apiBase}orders`, 'POST', JSON.stringify(order));
   };
 
-  const deleteCartSneaker = async (id: string) => {
-    return await request(`${apiBase}cart/${id}`, 'DELETE');
+  const deleteCartSneaker = (id: string) => {
+    return request(`${apiBase}cart/${id}`, 'DELETE');
   };
 
-  const getCart = async () => {
-    return await request(`${apiBase}cart`);
+  const getCart = () => {
+    return request(`${apiBase}cart`);
   };
 
-  const getOrders = async () => {
-    return await request(`${apiBase}orders`);
+  const getOrders = () => {
+    return request(`${apiBase}orders`);
   };
   const clearCart = async () => {
     const carts = await request(`${apiBase}cart`);

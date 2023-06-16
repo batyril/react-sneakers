@@ -1,14 +1,18 @@
-import Header from '../components/Header';
-import SideMenu from '../components/SideMenu';
-import style from './Orders.module.scss';
 import { useEffect, useState } from 'react';
-import useSneakersService from '../service/useSneakersService.tsx';
-import CardItem from '../components/CardItem';
-import { IOrders, ISneaker } from '../../interfaces.ts';
-import { Skeleton } from '../components/Skeleton';
 
-export function Orders({ sideMenuOpened }) {
-  const [items, setItems] = useState([]);
+import Header from '../../components/Header';
+import SideMenu from '../../components/SideMenu';
+import CardItem from '../../components/CardItem';
+import { Skeleton } from '../../components/Skeleton';
+import { Blank } from '../../components/Blank';
+
+import useSneakersService from '../../service/useSneakersService.tsx';
+import { IOrders, ISneaker } from '../../../interfaces.ts';
+
+import style from './Orders.module.scss';
+
+export function Orders() {
+  const [items, setItems] = useState<IOrders[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { getOrders } = useSneakersService();
   useEffect(() => {
@@ -21,12 +25,8 @@ export function Orders({ sideMenuOpened }) {
   }, []);
 
   const renderItem = () => {
-    if (isLoading) {
-      return [...Array(10)].map((_, index) => <Skeleton key={index} />);
-    }
-
-    return items.length === 0
-      ? null
+    return isLoading
+      ? [...Array(10)].map((_, index) => <Skeleton key={index} />)
       : items.map((order: IOrders) => {
           return (
             <div key={order.id} className={style.orders__item}>
@@ -42,13 +42,17 @@ export function Orders({ sideMenuOpened }) {
   };
   return (
     <>
-      {sideMenuOpened ? <SideMenu /> : null}
+      <SideMenu />
       <Header />
       <section className='content'>
-        <div className='orders'>
-          <h3 className={style.orders__title}>Мои заказы</h3>
-          {renderItem()}
-        </div>
+        {items.length > 0 ? (
+          <div className='orders'>
+            <h3 className={style.orders__title}>Мои заказы</h3>
+            {renderItem()}
+          </div>
+        ) : (
+          <Blank />
+        )}
       </section>
     </>
   );

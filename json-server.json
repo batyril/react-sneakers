@@ -2,101 +2,88 @@
   "sneakers": [
     {
       "price": 12999,
-      "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "avatar": "./src/img/sneakers/sneak-1.jpg",
+      "name": "Nike Blazer Low '77 Vintage",
+      "avatar": "./src/img/sneakers/Nike Blazer Low '77 Vintage.webp",
       "id": "1"
     },
     {
       "price": 13299,
-      "name": "Мужские Кроссовки Nike Air Max 270",
-      "avatar": "./src/img/sneakers/sneak-2.jpg",
+      "name": "Nike Dunk Low",
+      "avatar": "./src/img/sneakers/Nike Dunk Low.webp",
       "id": "2"
     },
     {
       "price": 8499,
-      "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "avatar": "./src/img/sneakers/sneak-3.jpg",
+      "name": "Nike Killshot 2 Leather",
+      "avatar": "./src/img/sneakers/Nike Killshot 2 Leather.webp",
       "id": "3"
     },
     {
       "price": 9699,
-      "name": "Кроссовки Puma X Aka Boku Future Rider",
-      "avatar": "./src/img/sneakers/sneak-4.jpg",
+      "name": "Air Jordan 1 Low G",
+      "avatar": "./src/img/sneakers/Air Jordan 1 Low G.webp",
       "id": "4"
     },
     {
       "price": 13299,
-      "name": "Мужские Кроссовки Nike Air Max 270",
-      "avatar": "./src/img/sneakers/sneak-2.jpg",
+      "name": "Air Jordan 1 Mid",
+      "avatar": "./src/img/sneakers/Air Jordan 1 Mid.webp",
+      "id": "5"
+    },
+    {
+      "price": 13299,
+      "name": "Nike Air Max 270",
+      "avatar": "./src/img/sneakers/Nike Air Max 270.webp",
       "id": "6"
     },
     {
-      "price": 13299,
-      "name": "Мужские Кроссовки Nike Air Max 270",
-      "avatar": "./src/img/sneakers/sneak-2.jpg",
+      "price": 12999,
+      "name": "Nike Air Max Plus",
+      "avatar": "./src/img/sneakers/Nike Air Max Plus.webp",
       "id": "7"
-    }
-  ],
-  "cart": [
-    {
-      "price": 12999,
-      "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "avatar": "./src/img/sneakers/sneak-1.jpg",
-      "id": "1"
     },
     {
       "price": 13299,
-      "name": "Мужские Кроссовки Nike Air Max 270",
-      "avatar": "./src/img/sneakers/sneak-2.jpg",
-      "id": "2"
-    }
-  ],
-  "favorite": [
-    {
-      "price": 12999,
-      "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "avatar": "./src/img/sneakers/sneak-1.jpg",
-      "id": "1"
+      "name": "Nike Air Monarch IV",
+      "avatar": "./src/img/sneakers/Nike Air Monarch IV.webp",
+      "id": "8"
     },
     {
       "price": 13299,
-      "name": "Мужские Кроссовки Nike Air Max 270",
-      "avatar": "./src/img/sneakers/sneak-2.jpg",
-      "id": "2"
+      "name": "Nike Blazer Mid '77 Vintage",
+      "avatar": "./src/img/sneakers/Nike Blazer Mid '77 Vintage.webp",
+      "id": "9"
     },
     {
-      "price": 8499,
-      "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "avatar": "./src/img/sneakers/sneak-3.jpg",
-      "id": "3"
+      "price": 13299,
+      "name": "Nike Dunk High Retro",
+      "avatar": "./src/img/sneakers/Nike Dunk High Retro.webp",
+      "id": "10"
     }
   ],
+  "cart": [],
+  "favorite": [],
   "orders": [
     {
-      "id": "4b59",
+      "id": 8029,
       "item": [
-        {
-          "price": 12999,
-          "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-          "avatar": "./src/img/sneakers/sneak-1.jpg",
-          "id": "1"
-        },
         {
           "price": 13299,
-          "name": "Мужские Кроссовки Nike Air Max 270",
-          "avatar": "./src/img/sneakers/sneak-2.jpg",
+          "name": "Nike Dunk Low",
+          "avatar": "./src/img/sneakers/Nike Dunk Low.webp",
           "id": "2"
-        }
-      ]
-    },
-    {
-      "id": "fc03",
-      "item": [
+        },
         {
-          "price": 12999,
-          "name": "Мужские Кроссовки Nike Blazer Mid Suede",
-          "avatar": "./src/img/sneakers/sneak-1.jpg",
-          "id": "1"
+          "price": 8499,
+          "name": "Nike Killshot 2 Leather",
+          "avatar": "./src/img/sneakers/Nike Killshot 2 Leather.webp",
+          "id": "3"
+        },
+        {
+          "price": 9699,
+          "name": "Air Jordan 1 Low G",
+          "avatar": "./src/img/sneakers/Air Jordan 1 Low G.webp",
+          "id": "4"
         }
       ]
     }

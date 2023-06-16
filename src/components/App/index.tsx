@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import { Home } from '../../pages/Home.tsx';
-import { Favorites } from '../../pages/Favorites.tsx';
-import { Orders } from '../../pages/Orders.tsx';
+import { Home } from '../../pages/Home';
+import { Favorites } from '../../pages/Favorites';
+import { Orders } from '../../pages/Orders';
+import { Error404 } from '../../pages/Error404';
 
 import { AppContext } from '../../context/AppContext.ts';
 import useSneakersService from '../../service/useSneakersService.tsx';
 import useFinalPrice from '../../hooks/useFinalPrice.ts';
 
-import { ISneaker, sneakersType } from '../../../interfaces.ts';
+import { ISneaker, SneakersType } from '../../../interfaces.ts';
 
 function App() {
   const [sideMenuOpened, setSideMenuOpened] = useState(false);
-  const [cartSneakers, setCartSneakers] = useState<sneakersType | []>([]);
-  const [allSneakers, setAllSneakers] = useState<sneakersType | []>([]);
-  const [favorites, setFavorites] = useState<sneakersType | []>([]);
+  const [cartSneakers, setCartSneakers] = useState<SneakersType | []>([]);
+  const [allSneakers, setAllSneakers] = useState<SneakersType | []>([]);
+  const [favorites, setFavorites] = useState<SneakersType | []>([]);
   const [searchName, setSearchName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const finalPrice: number = useFinalPrice(cartSneakers);
@@ -92,22 +93,13 @@ function App() {
       }}
     >
       <Routes>
-        <Route
-          path='/'
-          element={
-            <Home allSneakers={allSneakers} sideMenuOpened={sideMenuOpened} />
-          }
-        ></Route>
+        <Route path='/' element={<Home allSneakers={allSneakers} />}></Route>
         <Route
           path='/favorite'
-          element={
-            <Favorites favorites={favorites} sideMenuOpened={sideMenuOpened} />
-          }
+          element={<Favorites favorites={favorites} />}
         ></Route>
-        <Route
-          path='/orders'
-          element={<Orders sideMenuOpened={sideMenuOpened} />}
-        ></Route>
+        <Route path='/orders' element={<Orders />}></Route>
+        <Route path='*' element={<Error404 />}></Route>
       </Routes>
     </AppContext.Provider>
   );

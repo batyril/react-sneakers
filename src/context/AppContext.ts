@@ -1,19 +1,19 @@
 import React, { createContext } from 'react';
-import { ISneaker, sneakersType } from '../../interfaces.ts';
+import { ISneaker, SneakersType } from '../../interfaces.ts';
 
 interface IAppContext {
   searchName: string;
   setSearchName?: React.Dispatch<React.SetStateAction<string>>;
-  cartSneakers: sneakersType | [];
-  favorites: sneakersType | [];
+  cartSneakers: SneakersType | [];
+  favorites: SneakersType | [];
   onDeleteCart: (id: string) => void;
-  allSneakers: sneakersType | [];
+  allSneakers: SneakersType | [];
   isLoading: boolean;
   onAddFavorite: (sneaker: ISneaker) => void;
   onAddCart: (sneaker: ISneaker) => void;
   sideMenuOpened: boolean;
   setSideMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  setCartSneakers: React.Dispatch<React.SetStateAction<sneakersType | []>>;
+  setCartSneakers: React.Dispatch<React.SetStateAction<SneakersType | []>>;
   finalPrice: number;
 }
 
