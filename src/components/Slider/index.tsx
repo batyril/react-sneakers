@@ -9,7 +9,7 @@ import 'swiper/swiper-bundle.css';
 
 SwiperCore.use([Pagination, Autoplay]);
 
-function Slider() {
+export const Slider = () => {
   return (
     <div className={slyles.slider}>
       <Swiper loop pagination autoplay={{ delay: 3000 }}>
@@ -25,6 +25,4 @@ function Slider() {
       </Swiper>
     </div>
   );
-}
-
-export default Slider;
+};

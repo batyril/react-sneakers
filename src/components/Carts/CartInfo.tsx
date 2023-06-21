@@ -8,7 +8,7 @@ interface ICartInfo {
   isOrdered: boolean;
   orderId: string;
 }
-export default function CartInfo({ onClose, isOrdered, orderId }: ICartInfo) {
+export const CartInfo = ({ onClose, isOrdered, orderId }: ICartInfo) => {
   return (
     <div className={styles.emptyCart}>
       <img
@@ -31,4 +31,4 @@ export default function CartInfo({ onClose, isOrdered, orderId }: ICartInfo) {
       </button>
     </div>
   );
-}
+};

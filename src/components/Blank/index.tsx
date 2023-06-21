@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import buttons from '../../scss/buttons.module.scss';
 import arrowBack from '../../img/arrow-back.svg';
 
-export function Blank() {
+export const Blank = () => {
   return (
     <div className={styles.blank}>
       <p className={styles.blank__emoji}>&#128580;</p>
@@ -17,4 +17,4 @@ export function Blank() {
       </Link>
     </div>
   );
-}
+};

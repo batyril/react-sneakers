@@ -5,12 +5,11 @@ interface IAppContext {
   searchName: string;
   setSearchName?: React.Dispatch<React.SetStateAction<string>>;
   cartSneakers: SneakersType | [];
-  favorites: SneakersType | [];
-  onDeleteCart: (id: string) => void;
+  favoriteSneakers: SneakersType | [];
   allSneakers: SneakersType | [];
   isLoading: boolean;
-  onAddFavorite: (sneaker: ISneaker) => void;
-  onAddCart: (sneaker: ISneaker) => void;
+  updateFavorite: (sneaker: ISneaker) => void;
+  updateCart: (sneaker: ISneaker) => void;
   sideMenuOpened: boolean;
   setSideMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
   setCartSneakers: React.Dispatch<React.SetStateAction<SneakersType | []>>;
@@ -20,7 +19,7 @@ interface IAppContext {
 const defaultContext: IAppContext = {
   searchName: '',
   cartSneakers: [],
-  favorites: [],
+  favoriteSneakers: [],
   allSneakers: [],
   isLoading: false,
 };

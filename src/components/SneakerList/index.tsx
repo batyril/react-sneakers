@@ -1,5 +1,5 @@
-import Search from '../Search';
-import CardItem from '../CardItem';
+import { Search } from '../Search';
+import { CardItem } from '../CardItem';
 import styles from './SneakerList.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
@@ -12,8 +12,8 @@ interface ISneakerList {
   sneakers: SneakersType;
 }
 
-function SneakerList({ title, sneakers }: ISneakerList) {
-  const { searchName, isLoading, onAddFavorite, onAddCart } =
+export const SneakerList = ({ title, sneakers }: ISneakerList) => {
+  const { searchName, isLoading, updateFavorite, updateCart } =
     useContext(AppContext);
   const renderItem = () => {
     if (isLoading) {
@@ -30,9 +30,9 @@ function SneakerList({ title, sneakers }: ISneakerList) {
             {...sneaker}
             key={sneaker.id}
             addSideMenu={() => {
-              onAddCart(sneaker);
+              updateCart(sneaker);
             }}
-            addFavorite={() => onAddFavorite(sneaker)}
+            addFavorite={() => updateFavorite(sneaker)}
           />
         );
       });
@@ -48,6 +48,4 @@ function SneakerList({ title, sneakers }: ISneakerList) {
       <div className={styles.sneakers__list}>{renderItem()}</div>
     </div>
   );
-}
-
-export default SneakerList;
+};

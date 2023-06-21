@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext.ts';
 
-function Header() {
+export const Header = () => {
   const { setSideMenuOpened: onOpen, finalPrice } = useContext(AppContext);
 
   return (
@@ -39,6 +39,4 @@ function Header() {
       </ul>
     </header>
   );
-}
-
-export default Header;
+};

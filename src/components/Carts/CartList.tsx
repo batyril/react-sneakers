@@ -1,22 +1,22 @@
 import styles from '../SideMenu/SideMenu.module.scss';
-import CartItem from './CartItem.tsx';
+import { CartItem } from './CartItem.tsx';
 import arrow from '../../img/arrow.svg';
-import { SneakersType } from '../../const/interfaces.ts';
+import { ISneaker, SneakersType } from '../../const/interfaces.ts';
 import buttons from '../../scss/buttons.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 interface ICartList {
   sneakers: SneakersType;
-  onDeleteCart: (idl: string) => void;
+  onDeleteCart: (sneaker: ISneaker) => void;
   onOrdered: () => void;
   isLoading: boolean;
 }
-export default function CartList({
+export const CartList = ({
   sneakers,
   onDeleteCart,
   onOrdered,
   isLoading,
-}: ICartList) {
+}: ICartList) => {
   const { finalPrice } = useContext(AppContext);
   const tax = Math.round(finalPrice * 0.05);
   return (
@@ -27,7 +27,7 @@ export default function CartList({
             <CartItem
               key={sneaker.id}
               {...sneaker}
-              onDeleteCart={() => onDeleteCart(sneaker.id)}
+              onDeleteCart={() => onDeleteCart(sneaker)}
             />
           );
         })}
@@ -53,4 +53,4 @@ export default function CartList({
       </button>
     </>
   );
-}
+};

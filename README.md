@@ -7,3 +7,4 @@
 - SCSS
 - React Context
 - React Skeleton
+- axios

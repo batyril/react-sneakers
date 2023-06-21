@@ -2,8 +2,8 @@ import deleteIcon from '../../img/favorite-delete.svg';
 import styles from './SideMenu.module.scss';
 import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
-import CartList from '../Carts/CartList.tsx';
-import InfoCart from '../Carts/CartInfo.tsx';
+import { CartList } from '../Carts/CartList.tsx';
+import { CartInfo } from '../Carts/CartInfo.tsx';
 import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('1234567890abcdef', 4);
 import axios from 'axios';
@@ -13,7 +13,7 @@ function SideMenu() {
   const {
     setSideMenuOpened: onClose,
     cartSneakers,
-    onDeleteCart,
+    updateCart,
     setCartSneakers,
     sideMenuOpened,
   } = useContext(AppContext);
@@ -41,9 +41,9 @@ function SideMenu() {
       serOrderId(res.data.id);
 
       await clearCart();
-    } catch (e) {
+    } catch (error) {
       setIsLoading(false);
-      console.log(e.message);
+      console.log(error.message);
     }
   };
 
@@ -68,10 +68,10 @@ function SideMenu() {
               sendOrder();
             }}
             sneakers={cartSneakers}
-            onDeleteCart={onDeleteCart}
+            onDeleteCart={updateCart}
           />
         ) : (
-          <InfoCart
+          <CartInfo
             orderId={orderId}
             isOrdered={isOrdered}
             onClose={() => onClose(false)}

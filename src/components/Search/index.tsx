@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 import deleteIcon from '../../img/favorite-delete.svg';
 
-function Search() {
+export const Search = () => {
   const { searchName, setSearchName } = useContext(AppContext);
 
   const onClear = () => {
@@ -36,6 +36,4 @@ function Search() {
       ) : null}
     </form>
   );
-}
-
-export default Search;
+};

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useImmer } from 'use-immer';
 import { Routes, Route } from 'react-router-dom';
 
 import { Home } from '../../pages/Home';
@@ -14,57 +15,111 @@ import { ISneaker, SneakersType } from '../../const/interfaces.ts';
 import axios from 'axios';
 import { URLS } from '../../const/urls.ts';
 
-function App() {
-  const [sideMenuOpened, setSideMenuOpened] = useState(false);
-  const [cartSneakers, setCartSneakers] = useState<SneakersType | []>([]);
-  const [allSneakers, setAllSneakers] = useState<SneakersType | []>([]);
-  const [favorites, setFavorites] = useState<SneakersType | []>([]);
-  const [searchName, setSearchName] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+export const App = () => {
+  const [sideMenuOpened, setSideMenuOpened] = useImmer(false);
+  const [cartSneakers, setCartSneakers] = useImmer<SneakersType | []>([]);
+  const [allSneakers, setAllSneakers] = useImmer<SneakersType | []>([]);
+  const [searchName, setSearchName] = useImmer('');
+  const [isLoading, setIsLoading] = useImmer(false);
   const finalPrice: number = useFinalPrice(cartSneakers);
+  const [favoriteSneakers, setFavorites] = useImmer<SneakersType | []>([]);
 
-  const onAddFavorite = (sneaker: ISneaker) => {
-    if (favorites.some((item) => item.id === sneaker.id)) {
-      axios.delete(String(new URL(`favorite/${sneaker.id}`, URLS.FAVORITES)));
-      setFavorites((prev) => prev.filter((item) => item.id !== sneaker.id));
-    } else {
-      axios.post(String(URLS.FAVORITES), sneaker);
+  const updateFavorite = async (sneaker: ISneaker) => {
+    const isInFavorites = favoriteSneakers.some(
+      (item) => item.id === sneaker.id
+    );
+    try {
+      if (isInFavorites) {
+        deleteFromFavorites(sneaker.id);
+      } else {
+        addToFavorites(sneaker);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else if (typeof error === 'string') {
+        console.log(error);
+      }
+    }
+  };
+
+  const deleteFromFavorites = async (id: string) => {
+    try {
+      await axios.delete(String(new URL(`favorite/${id}`, URLS.FAVORITES)));
+      setFavorites((prev) => prev.filter((item) => item.id !== id));
+    } catch (e) {
+      throw new Error('Не удалось удалить элемент из избранного');
+    }
+  };
+
+  const addToFavorites = async (sneaker: ISneaker) => {
+    try {
+      await axios.post(String(URLS.FAVORITES), sneaker);
       setFavorites((prev) => [...prev, sneaker]);
+    } catch (e) {
+      throw new Error('Не удалось добавить элемент в избранное');
     }
   };
 
-  //TODO: переделать под Immer
-  const onAddCart = (obj: ISneaker) => {
-    if (cartSneakers.some((item) => item.id === obj.id)) {
-      setCartSneakers((prev) => prev.filter((item) => item.id !== obj.id));
-    } else {
-      axios.post(String(URLS.CART), obj);
-      setCartSneakers((prev) => [...prev, obj]);
+  const updateCart = async (sneaker: ISneaker) => {
+    const isInCart = cartSneakers.some((item) => item.id === sneaker.id);
+    try {
+      if (isInCart) {
+        deleteFromCart(sneaker.id);
+      } else {
+        addToCart(sneaker);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else if (typeof error === 'string') {
+        console.log(error);
+      }
     }
   };
 
-  const onDeleteCart = (id: string) => {
-    axios.delete(String(new URL(`cart/${id}`, URLS.CART)));
-    setCartSneakers((prevState) => prevState.filter((item) => item.id !== id));
+  const deleteFromCart = async (id: string) => {
+    try {
+      await axios.delete(String(new URL(`cart/${id}`, URLS.CART)));
+      setCartSneakers((prev) => prev.filter((item) => item.id !== id));
+    } catch (e) {
+      throw new Error('Не удалось удалить элемент из корзины');
+    }
+  };
+
+  const addToCart = async (sneaker: ISneaker) => {
+    try {
+      await axios.post(String(URLS.CART), sneaker);
+      setCartSneakers((prev) => [...prev, sneaker]);
+    } catch (e) {
+      throw new Error('Не удалось добавить элемент в корзину');
+    }
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      //TODO: переписать под promise all
-      setIsLoading(true);
-      const cartRes = await axios.get(String(URLS.CART));
-      const favoritesRes = await axios.get(String(URLS.FAVORITES));
-      const sneakersRes = await axios.get(String(URLS.SNEAKERS));
+      try {
+        setIsLoading(true);
+        const cartRes = await axios.get(String(URLS.CART));
+        const favoritesRes = await axios.get(String(URLS.FAVORITES));
+        const sneakersRes = await axios.get(String(URLS.SNEAKERS));
 
-      setCartSneakers(cartRes.data);
-      setFavorites(favoritesRes.data);
-      setAllSneakers(sneakersRes.data);
+        setCartSneakers(cartRes.data);
+        setFavorites(favoritesRes.data);
+        setAllSneakers(sneakersRes.data);
 
-      setIsLoading(false);
+        setIsLoading(false);
+      } catch (error) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        } else if (typeof error === 'string') {
+          console.log(error);
+        }
+      }
     };
 
     fetchData();
-  }, []);
+  }, [setAllSneakers, setCartSneakers, setFavorites, setIsLoading]);
 
   return (
     <AppContext.Provider
@@ -72,12 +127,11 @@ function App() {
         searchName,
         setSearchName,
         cartSneakers,
-        favorites,
-        onDeleteCart,
+        favoriteSneakers,
         allSneakers,
         isLoading,
-        onAddCart,
-        onAddFavorite,
+        updateFavorite,
+        updateCart,
         setSideMenuOpened,
         sideMenuOpened,
         setCartSneakers,
@@ -88,13 +142,11 @@ function App() {
         <Route path='/' element={<Home allSneakers={allSneakers} />}></Route>
         <Route
           path='/favorite'
-          element={<Favorites favorites={favorites} />}
+          element={<Favorites favorites={favoriteSneakers} />}
         ></Route>
         <Route path='/orders' element={<Orders />}></Route>
         <Route path='*' element={<Error404 />}></Route>
       </Routes>
     </AppContext.Provider>
   );
-}
-
-export default App;
+};

@@ -7,12 +7,7 @@ interface ICartItem {
   price: number;
   onDeleteCart: () => void;
 }
-export default function CartItem({
-  avatar,
-  name,
-  price,
-  onDeleteCart,
-}: ICartItem) {
+export const CartItem = ({ avatar, name, price, onDeleteCart }: ICartItem) => {
   return (
     <div className={styles.card}>
       <div>
@@ -27,4 +22,4 @@ export default function CartItem({
       </button>
     </div>
   );
-}
+};

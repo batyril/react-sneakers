@@ -1,9 +1,8 @@
 import styles from './Error404.module.scss';
 import SideMenu from '../../components/SideMenu';
-import Header from '../../components/Header';
+import { Header } from '../../components/Header';
 
-export function Error404() {
-  //TODO:Добавить логотип
+export const Error404 = () => {
   return (
     <>
       <SideMenu />
@@ -16,4 +15,4 @@ export function Error404() {
       </section>
     </>
   );
-}
+};

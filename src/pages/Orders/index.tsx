@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import Header from '../../components/Header';
+import { Header } from '../../components/Header';
 import SideMenu from '../../components/SideMenu';
-import CardItem from '../../components/CardItem';
+import { CardItem } from '../../components/CardItem';
 import { Skeleton } from '../../components/Skeleton';
 import { Blank } from '../../components/Blank';
 
@@ -13,15 +13,19 @@ import style from './Orders.module.scss';
 import axios from 'axios';
 import { URLS } from '../../const/urls.ts';
 
-export function Orders() {
+export const Orders = () => {
   const [items, setItems] = useState<IOrders[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
-      const response = await axios.get(String(URLS.ORDERS));
-      setItems(response.data);
-      setIsLoading(false);
+      try {
+        setIsLoading(true);
+        const response = await axios.get(String(URLS.ORDERS));
+        setItems(response.data);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e.message);
+      }
     })();
   }, []);
 
@@ -57,4 +61,4 @@ export function Orders() {
       </section>
     </>
   );
-}
+};

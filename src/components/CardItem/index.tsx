@@ -15,17 +15,17 @@ interface ICardItem {
   addFavorite?: () => void;
 }
 
-export default function CardItem({
+export const CardItem = ({
   avatar,
   price,
   name,
   addSideMenu,
   addFavorite,
   id,
-}: ICardItem) {
-  const { cartSneakers, favorites } = useContext(AppContext);
+}: ICardItem) => {
+  const { cartSneakers, favoriteSneakers } = useContext(AppContext);
   const inCart = cartSneakers.some((item) => item.id === id);
-  const isFavorite = favorites.some((item) => item.id === id);
+  const isFavorite = favoriteSneakers.some((item) => item.id === id);
 
   return (
     <div className={styles.card}>
@@ -58,4 +58,4 @@ export default function CardItem({
       </div>
     </div>
   );
-}
+};
