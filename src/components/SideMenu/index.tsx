@@ -32,7 +32,8 @@ function SideMenu() {
     try {
       setIsLoading(true);
       const res = await axios.post(String(URLS.ORDERS), {
-        id: Number(nanoid()),
+        id: nanoid(),
+        date: new Date(),
         item: cartSneakers,
       });
       setIsOrdered(true);
@@ -43,7 +44,11 @@ function SideMenu() {
       await clearCart();
     } catch (error) {
       setIsLoading(false);
-      console.log(error.message);
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else if (typeof error === 'string') {
+        console.log(error);
+      }
     }
   };
 

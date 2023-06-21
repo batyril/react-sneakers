@@ -8,6 +8,7 @@ export interface ISneaker {
 }
 export interface IOrders {
   id: number;
+  date: string;
   item: ISneaker[];
 }
 export type RequestFunction = <T>(

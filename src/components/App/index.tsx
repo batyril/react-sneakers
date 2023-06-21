@@ -22,7 +22,9 @@ export const App = () => {
   const [searchName, setSearchName] = useImmer('');
   const [isLoading, setIsLoading] = useImmer(false);
   const finalPrice: number = useFinalPrice(cartSneakers);
-  const [favoriteSneakers, setFavorites] = useImmer<SneakersType | []>([]);
+  const [favoriteSneakers, setFavoritesSneakers] = useImmer<SneakersType | []>(
+    []
+  );
 
   const updateFavorite = async (sneaker: ISneaker) => {
     const isInFavorites = favoriteSneakers.some(
@@ -46,7 +48,7 @@ export const App = () => {
   const deleteFromFavorites = async (id: string) => {
     try {
       await axios.delete(String(new URL(`favorite/${id}`, URLS.FAVORITES)));
-      setFavorites((prev) => prev.filter((item) => item.id !== id));
+      setFavoritesSneakers((prev) => prev.filter((item) => item.id !== id));
     } catch (e) {
       throw new Error('Не удалось удалить элемент из избранного');
     }
@@ -55,7 +57,7 @@ export const App = () => {
   const addToFavorites = async (sneaker: ISneaker) => {
     try {
       await axios.post(String(URLS.FAVORITES), sneaker);
-      setFavorites((prev) => [...prev, sneaker]);
+      setFavoritesSneakers((prev) => [...prev, sneaker]);
     } catch (e) {
       throw new Error('Не удалось добавить элемент в избранное');
     }
@@ -105,7 +107,7 @@ export const App = () => {
         const sneakersRes = await axios.get(String(URLS.SNEAKERS));
 
         setCartSneakers(cartRes.data);
-        setFavorites(favoritesRes.data);
+        setFavoritesSneakers(favoritesRes.data);
         setAllSneakers(sneakersRes.data);
 
         setIsLoading(false);
@@ -119,7 +121,7 @@ export const App = () => {
     };
 
     fetchData();
-  }, [setAllSneakers, setCartSneakers, setFavorites, setIsLoading]);
+  }, [setAllSneakers, setCartSneakers, setFavoritesSneakers, setIsLoading]);
 
   return (
     <AppContext.Provider
