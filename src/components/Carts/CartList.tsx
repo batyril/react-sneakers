@@ -45,10 +45,9 @@ export const CartList = ({
       <button
         disabled={isLoading}
         onClick={onOrdered}
-        className={buttons.button}
+        className={`${buttons.button} ${styles.sideMenu__btnOrdered}`}
       >
         <span className={buttons.button__text}>Оформить заказ </span>
-        {/*TODO: добавить анимацию покупки*/}
         <img className={buttons.buy__arrow} src={arrow} alt='arrow' />
       </button>
     </>

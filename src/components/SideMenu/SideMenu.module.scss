@@ -61,7 +61,14 @@
     border: 1px solid #F2F2F2;
     border-radius: 8px;
 }
+  &__btnOrdered{
+    color: red;
+    &:disabled{
+      animation: button-loading 0.2s ease-in-out;
+    }
+  }
 }
+
 
 
 .total {
