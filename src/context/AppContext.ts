@@ -8,11 +8,11 @@ interface IAppContext {
   favoriteSneakers: SneakersType | [];
   allSneakers: SneakersType | [];
   isLoading: boolean;
-  updateFavorite: (sneaker: ISneaker) => void;
-  updateCart: (sneaker: ISneaker) => void;
+  updateFavorite?: (sneaker: ISneaker) => void;
+  updateCart?: (sneaker: ISneaker) => void;
   sideMenuOpened: boolean;
-  setSideMenuOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  setCartSneakers: React.Dispatch<React.SetStateAction<SneakersType | []>>;
+  setSideMenuOpened?: React.Dispatch<React.SetStateAction<boolean>>;
+  setCartSneakers?: React.Dispatch<React.SetStateAction<SneakersType | []>>;
   finalPrice: number;
 }
 
@@ -22,6 +22,8 @@ const defaultContext: IAppContext = {
   favoriteSneakers: [],
   allSneakers: [],
   isLoading: false,
+  finalPrice: 0,
+  sideMenuOpened: false,
 };
 
 export const AppContext = createContext(defaultContext);

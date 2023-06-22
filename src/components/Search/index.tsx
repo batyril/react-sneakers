@@ -16,7 +16,7 @@ export const Search = () => {
   return (
     <form className={styles.search}>
       <input
-        onChange={(e) => setSearchName(e.target.value)}
+        onChange={(e) => (setSearchName ? setSearchName(e.target.value) : null)}
         value={searchName}
         className={styles.search__input}
         placeholder='Поиск...'
