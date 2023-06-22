@@ -30,7 +30,7 @@
   height: 100vh;
   top: 0;
   right: 0;
-  background: #FFFFFF;
+  background: #F6F6F6;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
   gap: 15px;
   transition: opacity 0.5s ease-in-out,  visibility 0.4s ease-in-out;
@@ -41,6 +41,7 @@
 }
   &__list {
     flex-grow: 1;
+    overflow-x: hidden;
 }
   &__tax {
     margin-bottom: 25px;

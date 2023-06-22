@@ -7,6 +7,10 @@
   &__sneakers{
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
   }
   &__item{
     margin-bottom: 50px;
