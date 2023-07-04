@@ -7,7 +7,7 @@ interface IAppContext {
   cartSneakers: SneakersType | [];
   favoriteSneakers: SneakersType | [];
   allSneakers: SneakersType | [];
-  isLoading: boolean;
+  isLoadingSneakers: boolean;
   updateFavorite?: (sneaker: ISneaker) => void;
   updateCart?: (sneaker: ISneaker) => void;
   sideMenuOpened: boolean;
@@ -21,7 +21,7 @@ const defaultContext: IAppContext = {
   cartSneakers: [],
   favoriteSneakers: [],
   allSneakers: [],
-  isLoading: false,
+  isLoadingSneakers: false,
   finalPrice: 0,
   sideMenuOpened: false,
 };

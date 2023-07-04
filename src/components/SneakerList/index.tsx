@@ -13,10 +13,10 @@ interface ISneakerList {
 }
 
 export const SneakerList = ({ title, sneakers }: ISneakerList) => {
-  const { searchName, isLoading, updateFavorite, updateCart } =
+  const { searchName, isLoadingSneakers, updateFavorite, updateCart } =
     useContext(AppContext);
   const renderItem = () => {
-    if (isLoading) {
+    if (isLoadingSneakers) {
       return [...Array(10)].map((_, index) => <Skeleton key={index} />);
     }
 
