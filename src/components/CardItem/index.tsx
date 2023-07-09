@@ -3,8 +3,8 @@ import addFavoriteIcon from '../../img/add-favorites.svg';
 import deleteFavorite from '../../img/delete-favorite.svg';
 import deleteCard from '../../img/deleteCart.svg';
 import styles from './CardItem.module.scss';
-import { useContext } from 'react';
-import { AppContext } from '../../context/AppContext.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 interface ICardItem {
   avatar: string;
@@ -23,7 +23,8 @@ export const CardItem = ({
   addFavorite,
   id,
 }: ICardItem) => {
-  const { cartSneakers, favoriteSneakers } = useContext(AppContext);
+  const favoriteSneakers = useSelector((state: RootState) => state.favorite);
+  const cartSneakers = useSelector((state: RootState) => state.cart);
   const inCart = cartSneakers.some((item) => item.id === id);
   const isFavorite = favoriteSneakers.some((item) => item.id === id);
 

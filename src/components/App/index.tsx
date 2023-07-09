@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useImmer } from 'use-immer';
 import { Routes, Route } from 'react-router-dom';
 
@@ -9,31 +8,22 @@ import { Error404 } from '../../pages/Error404';
 
 import { AppContext } from '../../context/AppContext.ts';
 
-import { ISneaker, SneakersType } from '../../const/interfaces.ts';
+import { ISneaker } from '../../const/interfaces.ts';
 
 import useFinalPrice from '../../hooks/useFinalPrice.ts';
-import { TanStackQueryService } from '../../services/TanStackQueryService.ts';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { addFavorite, deleteFavorite } from '../../store/favoriteSlice.ts';
+
+import { RootState } from '../../store';
+import { deleteCart, addCart } from '../../store/cartSlice.ts';
 export const App = () => {
   const [sideMenuOpened, setSideMenuOpened] = useImmer(false);
-  const [cartSneakers, setCartSneakers] = useImmer<SneakersType | []>([]);
-  const [allSneakers, setAllSneakers] = useImmer<SneakersType | []>([]);
   const [searchName, setSearchName] = useImmer('');
+  const favoriteSneakers = useSelector((state: RootState) => state.favorite);
+  const cartSneakers = useSelector((state: RootState) => state.cart);
   const finalPrice: number = useFinalPrice(cartSneakers);
-  const [favoriteSneakers, setFavoritesSneakers] = useImmer<SneakersType | []>(
-    []
-  );
-
-  const {
-    sneakersData,
-    isLoadingSneakers,
-    cartData,
-    favoriteData,
-    deleteFromCart,
-    addToCart,
-    addToFavorites,
-    deleteFromFavorites,
-  } = TanStackQueryService();
+  const dispatch = useDispatch();
 
   const updateFavorite = async (sneaker: ISneaker) => {
     const isInFavorites = favoriteSneakers.some(
@@ -41,9 +31,9 @@ export const App = () => {
     );
     try {
       if (isInFavorites) {
-        deleteFromFavorites(sneaker.id);
+        dispatch(deleteFavorite(sneaker.id));
       } else {
-        addToFavorites(sneaker);
+        dispatch(addFavorite(sneaker));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -58,9 +48,9 @@ export const App = () => {
     const isInCart = cartSneakers.some((item) => item.id === sneaker.id);
     try {
       if (isInCart) {
-        deleteFromCart(sneaker.id);
+        dispatch(deleteCart(sneaker.id));
       } else {
-        addToCart(sneaker);
+        dispatch(addCart(sneaker));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -71,44 +61,21 @@ export const App = () => {
     }
   };
 
-  useEffect(() => {
-    if (cartData && favoriteData && sneakersData) {
-      setCartSneakers(cartData);
-      setFavoritesSneakers(favoriteData);
-      setAllSneakers(sneakersData);
-    }
-  }, [
-    cartData,
-    favoriteData,
-    setAllSneakers,
-    setCartSneakers,
-    setFavoritesSneakers,
-    sneakersData,
-  ]);
-
   return (
     <AppContext.Provider
       value={{
         searchName,
         setSearchName,
-        cartSneakers,
-        favoriteSneakers,
-        allSneakers,
-        isLoadingSneakers,
         updateFavorite,
         updateCart,
         setSideMenuOpened,
         sideMenuOpened,
-        setCartSneakers,
         finalPrice,
       }}
     >
       <Routes>
-        <Route path='/' element={<Home allSneakers={allSneakers} />}></Route>
-        <Route
-          path='/favorite'
-          element={<Favorites favorites={favoriteSneakers} />}
-        ></Route>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/favorite' element={<Favorites />}></Route>
         <Route path='/orders' element={<Orders />}></Route>
         <Route path='*' element={<Error404 />}></Route>
       </Routes>

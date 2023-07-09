@@ -4,10 +4,6 @@ import { ISneaker, SneakersType } from '../const/interfaces.ts';
 interface IAppContext {
   searchName: string;
   setSearchName?: React.Dispatch<React.SetStateAction<string>>;
-  cartSneakers: SneakersType | [];
-  favoriteSneakers: SneakersType | [];
-  allSneakers: SneakersType | [];
-  isLoadingSneakers: boolean;
   updateFavorite?: (sneaker: ISneaker) => void;
   updateCart?: (sneaker: ISneaker) => void;
   sideMenuOpened: boolean;
@@ -18,10 +14,6 @@ interface IAppContext {
 
 const defaultContext: IAppContext = {
   searchName: '',
-  cartSneakers: [],
-  favoriteSneakers: [],
-  allSneakers: [],
-  isLoadingSneakers: false,
   finalPrice: 0,
   sideMenuOpened: false,
 };

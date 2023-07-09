@@ -6,11 +6,13 @@ import { CartList } from '../Carts/CartList.tsx';
 import { CartInfo } from '../Carts/CartInfo.tsx';
 import { useOutsideClick } from '../../hooks/useOutsideClick.ts';
 import { useOrderMutation } from '../../hooks/useOrderMutation.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 function SideMenu() {
+  const cartSneakers = useSelector((state: RootState) => state.cart);
   const {
     setSideMenuOpened: onClose,
-    cartSneakers,
     updateCart,
     setCartSneakers,
     sideMenuOpened,

@@ -2,13 +2,11 @@ import { Header } from '../../components/Header';
 import SideMenu from '../../components/SideMenu';
 import { SneakerList } from '../../components/SneakerList';
 import { Blank } from '../../components/Blank';
-import { SneakersType } from '../../const/interfaces.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
-interface IFavorites {
-  favorites: SneakersType | [];
-}
-
-export const Favorites = ({ favorites }: IFavorites) => {
+export const Favorites = () => {
+  const favorites = useSelector((state: RootState) => state.favorite);
   const title = 'Мои избранные';
   return (
     <>
