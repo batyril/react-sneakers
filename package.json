@@ -3,11 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://batyril.github.io/react-sneakers",
   "scripts": {
     "dev": "concurrently \"vite\" \"json-server --watch json-server.json\"",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@redux-devtools/extension": "^3.2.5",
@@ -42,6 +45,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "gh-pages": "^5.0.0",
     "prettier": "2.8.8",
     "sass": "^1.62.1",
     "typescript": "^5.0.2",
