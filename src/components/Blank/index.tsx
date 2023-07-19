@@ -1,7 +1,7 @@
 import styles from './Blank.module.scss';
 import { Link } from 'react-router-dom';
 import buttons from '../../scss/buttons.module.scss';
-import arrowBack from '../../img/arrow-back.svg';
+import arrowBack from '../../image/arrow-back.svg';
 
 interface IBlank {
   order: boolean;

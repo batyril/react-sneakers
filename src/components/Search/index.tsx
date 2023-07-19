@@ -1,8 +1,8 @@
-import searchIcon from '../../img/search.svg';
+import searchIcon from '../../image/search.svg';
 import styles from './Search.module.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
-import deleteIcon from '../../img/favorite-delete.svg';
+import deleteIcon from '../../image/favorite-delete.svg';
 
 export const Search = () => {
   const { searchName, setSearchName } = useContext(AppContext);

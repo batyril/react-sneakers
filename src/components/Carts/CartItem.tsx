@@ -1,4 +1,4 @@
-import deleteIcon from '../../img/favorite-delete.svg';
+import deleteIcon from '../../image/favorite-delete.svg';
 import styles from './CartItem.module.scss';
 
 interface ICartItem {

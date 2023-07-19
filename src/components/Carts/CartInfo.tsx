@@ -1,7 +1,7 @@
 import styles from '../SideMenu/SideMenu.module.scss';
-import emptyIcon from '../../img/empty-cart.png';
-import arrowBack from '../../img/arrow-back.svg';
-import orderedImage from '../../img/ordered.png';
+import emptyIcon from '../../image/empty-cart.png';
+import arrowBack from '../../image/arrow-back.svg';
+import orderedImage from '../../image/ordered.png';
 import buttons from '../../scss/buttons.module.scss';
 interface ICartInfo {
   onClose: () => void;

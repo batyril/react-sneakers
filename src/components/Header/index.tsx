@@ -1,13 +1,13 @@
-import account from '../../img/account.svg';
-import openFavorites from '../../img/open-favorite.svg';
-import logo from '../../img/nike-logo.svg';
-import store from '../../img/store.svg';
+import account from '../../image/account.svg';
+import openFavorites from '../../image/open-favorite.svg';
+import logo from '../../image/nike-logo.svg';
+import store from '../../image/store.svg';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../context/AppContext.ts';
 import { useLocation } from 'react-router';
-import favoritePage from '../../img/delete-favorite.svg';
-import ordersPage from '../../img/ordersPage.svg';
+import favoritePage from '../../image/delete-favorite.svg';
+import ordersPage from '../../image/ordersPage.svg';
 import styles from './Header.module.scss';
 export const Header = () => {
   const location = useLocation();

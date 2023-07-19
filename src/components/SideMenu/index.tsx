@@ -1,4 +1,4 @@
-import deleteIcon from '../../img/favorite-delete.svg';
+import deleteIcon from '../../image/favorite-delete.svg';
 import styles from './SideMenu.module.scss';
 import { useContext, useRef, useState } from 'react';
 import { AppContext } from '../../context/AppContext.ts';

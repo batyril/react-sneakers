@@ -1,6 +1,6 @@
-import slide1 from '../../img/sliders/slide-1.jpg';
-import slide2 from '../../img/sliders/slide-2.jpg';
-import slide3 from '../../img/sliders/slide-3.jpg';
+import slide1 from '../../image/sliders/slide-1.jpg';
+import slide2 from '../../image/sliders/slide-2.jpg';
+import slide3 from '../../image/sliders/slide-3.jpg';
 import slyles from './Slider.module.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination, Autoplay } from 'swiper';

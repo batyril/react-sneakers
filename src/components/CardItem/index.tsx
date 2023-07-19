@@ -1,7 +1,7 @@
-import plusIcon from '../../img/plus.svg';
-import addFavoriteIcon from '../../img/add-favorites.svg';
-import deleteFavorite from '../../img/delete-favorite.svg';
-import deleteCard from '../../img/deleteCart.svg';
+import plusIcon from '../../image/plus.svg';
+import addFavoriteIcon from '../../image/add-favorites.svg';
+import deleteFavorite from '../../image/delete-favorite.svg';
+import deleteCard from '../../image/deleteCart.svg';
 import styles from './CardItem.module.scss';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';

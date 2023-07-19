@@ -91,7 +91,7 @@ export const App = () => {
       }}
     >
       <Routes>
-        <Route path='/' element={<Home />}></Route>
+        <Route path='/react-sneakers' element={<Home />}></Route>
         <Route path='/favorite' element={<Favorites />}></Route>
         <Route path='/orders' element={<Orders />}></Route>
         <Route path='*' element={<Error404 />}></Route>
