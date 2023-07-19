@@ -6,7 +6,7 @@ import { CartList } from '../Carts/CartList.tsx';
 import { CartInfo } from '../Carts/CartInfo.tsx';
 import { useOutsideClick } from '../../hooks/useOutsideClick.ts';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import { POSTOrder } from '../../store/orderSlice.ts';
 import { clearCartStore, DELETECart } from '../../store/cartSlice.ts';
 import { ISneaker } from '../../const/interfaces.ts';
@@ -21,9 +21,9 @@ function SideMenu() {
 
   const [isOrdered, setIsOrdered] = useState(false);
   const [orderId, serOrderId] = useState('');
-  const sideMenuRef = useRef(null);
+  const sideMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(sideMenuRef, onClose);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const makeOrder = () => {
     dispatch(POSTOrder(cart)).then((res) => serOrderId(res.payload));
     dispatch(clearCartStore());
@@ -39,7 +39,7 @@ function SideMenu() {
       <div ref={sideMenuRef} className={styles.sideMenu}>
         <h3 className={styles.sideMenu__title}>Корзина </h3>
         <button
-          onClick={() => onClose(false)}
+          onClick={() => (onClose ? onClose(false) : null)}
           className={styles.sideMenu__close}
         >
           <img src={deleteIcon} alt='delete' />
@@ -56,7 +56,7 @@ function SideMenu() {
           <CartInfo
             orderId={orderId}
             isOrdered={isOrdered}
-            onClose={() => onClose(false)}
+            onClose={() => (onClose ? onClose(false) : null)}
           />
         )}
       </div>

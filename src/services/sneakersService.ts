@@ -3,7 +3,7 @@ import { URLS } from '../const/urls.ts';
 import { IOrders, ISneaker } from '../const/interfaces.ts';
 
 export const sneakersService = () => {
-  const deleteCart = async (id: string) => {
+  const deleteCart = async (id: number) => {
     await axios.delete(String(new URL(`cart/${id}`, URLS.CART)));
   };
 
@@ -14,7 +14,7 @@ export const sneakersService = () => {
     await axios.post(String(URLS.FAVORITES), sneaker);
   };
 
-  const deleteFavorite = async (id: string) => {
+  const deleteFavorite = async (id: number) => {
     await axios.delete(String(new URL(`favorite/${id}`, URLS.FAVORITES)));
   };
   const getSneakers = async () => {

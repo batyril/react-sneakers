@@ -34,9 +34,13 @@ export const SneakerList = ({
             {...sneaker}
             key={sneaker.id}
             addSideMenu={() => {
-              updateCart(sneaker);
+              if (updateCart) {
+                updateCart(sneaker);
+              }
             }}
-            addFavorite={() => updateFavorite(sneaker)}
+            addFavorite={() =>
+              updateFavorite ? updateFavorite(sneaker) : null
+            }
           />
         );
       });

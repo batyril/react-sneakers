@@ -26,7 +26,7 @@ export const POSTFavorite = createAsyncThunk(
 
 export const DELETEFavorite = createAsyncThunk(
   'favorite/delete',
-  async (id: string, { dispatch }) => {
+  async (id: number, { dispatch }) => {
     await deleteFavorite(id);
     dispatch(fetchFavorite());
   }

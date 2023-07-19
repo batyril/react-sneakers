@@ -14,7 +14,7 @@ export const Search = () => {
   };
 
   return (
-    <form className={styles.search}>
+    <form>
       <div className={styles.search__inputWpapper}>
         <input
           onChange={(e) =>

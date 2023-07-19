@@ -13,13 +13,13 @@ import { Blank } from '../../components/Blank';
 import { useEffect } from 'react';
 import { fetchOrders } from '../../store/orderSlice.ts';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 
 export const Orders = () => {
   const { orders, status } = useSelector(
     (state: RootState) => state.orderDetails
   );
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchOrders());
   }, []);

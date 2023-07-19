@@ -22,7 +22,7 @@ export const Favorites = () => {
             sneakers={favorite}
           />
         ) : (
-          <Blank />
+          <Blank order={false} />
         )}
       </section>
     </>

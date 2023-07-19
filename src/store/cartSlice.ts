@@ -27,7 +27,7 @@ export const POSTCart = createAsyncThunk(
 
 export const DELETECart = createAsyncThunk(
   'cart/delete',
-  async (id: string, { dispatch }) => {
+  async (id: number, { dispatch }) => {
     await deleteCart(id);
     dispatch(fetchCart());
   }

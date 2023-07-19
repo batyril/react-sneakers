@@ -36,7 +36,11 @@ export const Header = () => {
       </Link>
       <ul className={styles.header__menu}>
         <li>
-          <img onClick={() => onOpen(true)} src={store} alt='store ' />
+          <img
+            onClick={() => (onOpen ? onOpen(true) : null)}
+            src={store}
+            alt='store '
+          />
           <span>{finalPrice} ₽</span>
         </li>
         <li>

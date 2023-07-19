@@ -19,7 +19,7 @@ import {
   POSTFavorite,
 } from '../../store/favoriteSlice.ts';
 
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import { DELETECart, POSTCart, fetchCart } from '../../store/cartSlice.ts';
 import { useEffect } from 'react';
 import { fetchSneakers } from '../../store/sneakersSlice.ts';
@@ -33,7 +33,7 @@ export const App = () => {
     (state: RootState) => state.cartDetails.cart
   );
   const finalPrice: number = useFinalPrice(cartSneakers);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchSneakers());
