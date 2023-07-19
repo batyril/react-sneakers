@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import favoriteSlice from './favoriteSlice.ts';
 import cartSlice from './cartSlice.ts';
 import sneakersSlice from './sneakersSlice.ts';
+import orderSlice from './orderSlice.ts';
 
 export const store = configureStore({
   reducer: {
-    favorite: favoriteSlice,
-    cart: cartSlice,
-    sneakers: sneakersSlice,
+    orderDetails: orderSlice,
+    favoriteDetails: favoriteSlice,
+    cartDetails: cartSlice,
+    sneakersDetails: sneakersSlice,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });

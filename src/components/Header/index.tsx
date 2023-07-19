@@ -17,21 +17,23 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.header__logo}>
-        <Link title='home' to='/'>
+      <Link title='home' to='/'>
+        <div className={styles.header__logo}>
           <img
             width='100px'
             className={styles.header__image}
             alt='logo'
             src={logo}
           />
-        </Link>
 
-        <div>
-          <h3 className={styles.header__title}>Nike Sneaker Hub</h3>
-          <p className={styles.header__description}>Магазин лучших кроссовок</p>
+          <div>
+            <h3 className={styles.header__title}>Nike Sneaker Hub</h3>
+            <p className={styles.header__description}>
+              Магазин лучших кроссовок
+            </p>
+          </div>
         </div>
-      </div>
+      </Link>
       <ul className={styles.header__menu}>
         <li>
           <img onClick={() => onOpen(true)} src={store} alt='store ' />

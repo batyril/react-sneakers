@@ -6,15 +6,21 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
 export const Favorites = () => {
-  const favorites = useSelector((state: RootState) => state.favorite);
+  const { favorite, status } = useSelector(
+    (state: RootState) => state.favoriteDetails
+  );
   const title = 'Мои избранные';
   return (
     <>
       <SideMenu />
       <Header />
       <section className='content'>
-        {favorites.length > 0 ? (
-          <SneakerList title={title} sneakers={favorites} />
+        {favorite.length > 0 ? (
+          <SneakerList
+            isLoadingSneakers={status}
+            title={title}
+            sneakers={favorite}
+          />
         ) : (
           <Blank />
         )}

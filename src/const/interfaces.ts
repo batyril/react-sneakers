@@ -4,7 +4,8 @@ export interface ISneaker {
   price: number;
   name: string;
   avatar: string;
-  id: string;
+  id: number;
+  parentID: number;
 }
 export interface IOrders {
   id: number;

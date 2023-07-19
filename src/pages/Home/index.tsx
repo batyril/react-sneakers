@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
 export const Home = () => {
-  const sneakers = useSelector((state: RootState) => state.sneakers);
+  const { sneakers, status } = useSelector(
+    (state: RootState) => state.sneakersDetails
+  );
   const title = 'Все кроссовки';
   return (
     <>
@@ -14,7 +16,11 @@ export const Home = () => {
       <Header />
       <section className='content'>
         <Slider />
-        <SneakerList title={title} sneakers={sneakers} />
+        <SneakerList
+          isLoadingSneakers={status}
+          title={title}
+          sneakers={sneakers}
+        />
       </section>
     </>
   );

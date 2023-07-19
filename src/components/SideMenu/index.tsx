@@ -1,41 +1,34 @@
 import deleteIcon from '../../img/favorite-delete.svg';
 import styles from './SideMenu.module.scss';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { AppContext } from '../../context/AppContext.ts';
 import { CartList } from '../Carts/CartList.tsx';
 import { CartInfo } from '../Carts/CartInfo.tsx';
 import { useOutsideClick } from '../../hooks/useOutsideClick.ts';
-import { useOrderMutation } from '../../hooks/useOrderMutation.ts';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { POSTOrder } from '../../store/orderSlice.ts';
+import { clearCartStore, DELETECart } from '../../store/cartSlice.ts';
+import { ISneaker } from '../../const/interfaces.ts';
 
 function SideMenu() {
-  const cartSneakers = useSelector((state: RootState) => state.cart);
-  const {
-    setSideMenuOpened: onClose,
-    updateCart,
-    setCartSneakers,
-    sideMenuOpened,
-  } = useContext(AppContext);
+  const { cart } = useSelector((state: RootState) => state.cartDetails);
+  const deleteCart = (sneaker: ISneaker) => {
+    dispatch(DELETECart(sneaker.id));
+  };
+
+  const { setSideMenuOpened: onClose, sideMenuOpened } = useContext(AppContext);
 
   const [isOrdered, setIsOrdered] = useState(false);
   const [orderId, serOrderId] = useState('');
   const sideMenuRef = useRef(null);
   useOutsideClick(sideMenuRef, onClose);
-
-  const { isLoading, mutate, isSuccess } = useOrderMutation(cartSneakers);
+  const dispatch = useDispatch();
   const makeOrder = () => {
-    mutate(serOrderId);
+    dispatch(POSTOrder(cart)).then((res) => serOrderId(res.payload));
+    dispatch(clearCartStore());
+    setIsOrdered(true);
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      setIsOrdered(true);
-      if (setCartSneakers) {
-        setCartSneakers([]);
-      }
-    }
-  }, [isSuccess, setCartSneakers]);
 
   return (
     <div
@@ -51,12 +44,13 @@ function SideMenu() {
         >
           <img src={deleteIcon} alt='delete' />
         </button>
-        {cartSneakers.length !== 0 && !isOrdered ? (
+
+        {cart.length !== 0 ? (
           <CartList
-            isLoading={isLoading}
+            isLoading={false}
             onOrdered={makeOrder}
-            sneakers={cartSneakers}
-            onDeleteCart={updateCart}
+            sneakers={cart}
+            onDeleteCart={deleteCart}
           />
         ) : (
           <CartInfo

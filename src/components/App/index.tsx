@@ -13,27 +13,43 @@ import { ISneaker } from '../../const/interfaces.ts';
 import useFinalPrice from '../../hooks/useFinalPrice.ts';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addFavorite, deleteFavorite } from '../../store/favoriteSlice.ts';
+import {
+  DELETEFavorite,
+  fetchFavorite,
+  POSTFavorite,
+} from '../../store/favoriteSlice.ts';
 
 import { RootState } from '../../store';
-import { deleteCart, addCart } from '../../store/cartSlice.ts';
+import { DELETECart, POSTCart, fetchCart } from '../../store/cartSlice.ts';
+import { useEffect } from 'react';
+import { fetchSneakers } from '../../store/sneakersSlice.ts';
 export const App = () => {
   const [sideMenuOpened, setSideMenuOpened] = useImmer(false);
   const [searchName, setSearchName] = useImmer('');
-  const favoriteSneakers = useSelector((state: RootState) => state.favorite);
-  const cartSneakers = useSelector((state: RootState) => state.cart);
+  const favoriteSneakers = useSelector(
+    (state: RootState) => state.favoriteDetails.favorite
+  );
+  const cartSneakers = useSelector(
+    (state: RootState) => state.cartDetails.cart
+  );
   const finalPrice: number = useFinalPrice(cartSneakers);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchSneakers());
+    dispatch(fetchFavorite());
+    dispatch(fetchCart());
+  }, [dispatch]);
+
   const updateFavorite = async (sneaker: ISneaker) => {
-    const isInFavorites = favoriteSneakers.some(
-      (item) => item.id === sneaker.id
+    const isInFavorites = favoriteSneakers.find(
+      (item) => item.parentID === sneaker.id
     );
     try {
       if (isInFavorites) {
-        dispatch(deleteFavorite(sneaker.id));
+        dispatch(DELETEFavorite(isInFavorites.id));
       } else {
-        dispatch(addFavorite(sneaker));
+        dispatch(POSTFavorite(sneaker));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -45,12 +61,13 @@ export const App = () => {
   };
 
   const updateCart = async (sneaker: ISneaker) => {
-    const isInCart = cartSneakers.some((item) => item.id === sneaker.id);
+    const isInCart = cartSneakers.find((item) => item.parentID === sneaker.id);
+
     try {
       if (isInCart) {
-        dispatch(deleteCart(sneaker.id));
+        dispatch(DELETECart(isInCart.id));
       } else {
-        dispatch(addCart(sneaker));
+        dispatch(POSTCart(sneaker));
       }
     } catch (error) {
       if (error instanceof Error) {

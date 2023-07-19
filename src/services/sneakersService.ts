@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { URLS } from '../const/urls.ts';
-import { IOrders, ISneaker, SneakersType } from '../const/interfaces.ts';
-import { customAlphabet } from 'nanoid';
-import React from 'react';
-const nanoid = customAlphabet('1234567890abcdef', 4);
+import { IOrders, ISneaker } from '../const/interfaces.ts';
 
 export const sneakersService = () => {
   const deleteCart = async (id: string) => {
@@ -47,17 +44,13 @@ export const sneakersService = () => {
     return response.data;
   };
 
-  const createOrder = async (
-    cartSneakers: SneakersType | [],
-    serOrderId: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    const res = await axios.post(String(URLS.ORDERS), {
-      id: nanoid(),
-      date: new Date(),
-      item: cartSneakers,
-    });
+  const createOrder = async (order: {
+    date: Date;
+    item: ISneaker[];
+    id: string;
+  }) => {
+    const res = await axios.post(String(URLS.ORDERS), order);
     await clearCart();
-    serOrderId(res.data.id);
     return res;
   };
 

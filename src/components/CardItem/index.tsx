@@ -10,7 +10,8 @@ interface ICardItem {
   avatar: string;
   price: number;
   name: string;
-  id: string;
+  id: number;
+  parentID: number;
   addSideMenu?: () => void;
   addFavorite?: () => void;
 }
@@ -23,10 +24,14 @@ export const CardItem = ({
   addFavorite,
   id,
 }: ICardItem) => {
-  const favoriteSneakers = useSelector((state: RootState) => state.favorite);
-  const cartSneakers = useSelector((state: RootState) => state.cart);
-  const inCart = cartSneakers.some((item) => item.id === id);
-  const isFavorite = favoriteSneakers.some((item) => item.id === id);
+  const favoriteSneakers = useSelector(
+    (state: RootState) => state.favoriteDetails.favorite
+  );
+  const cartSneakers = useSelector(
+    (state: RootState) => state.cartDetails.cart
+  );
+  const inCart = cartSneakers.some((item) => item.parentID === id);
+  const isFavorite = favoriteSneakers.some((item) => item.parentID === id);
 
   return (
     <div className={styles.card}>

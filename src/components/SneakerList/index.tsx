@@ -10,13 +10,17 @@ import { getCroppedString } from '../../helpers/getСroppedString.ts';
 interface ISneakerList {
   title: string;
   sneakers: SneakersType;
+  isLoadingSneakers: 'loading' | 'resolved' | 'rejected';
 }
 
-export const SneakerList = ({ title, sneakers }: ISneakerList) => {
-  const { searchName, isLoadingSneakers, updateFavorite, updateCart } =
-    useContext(AppContext);
+export const SneakerList = ({
+  title,
+  sneakers,
+  isLoadingSneakers,
+}: ISneakerList) => {
+  const { searchName, updateFavorite, updateCart } = useContext(AppContext);
   const renderItem = () => {
-    if (isLoadingSneakers) {
+    if (isLoadingSneakers === 'loading') {
       return [...Array(10)].map((_, index) => <Skeleton key={index} />);
     }
 
