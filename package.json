@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://batyril.github.io/react-sneakers",
+  "homepage": "https://batyril.github.io/react-sneakers/",
   "scripts": {
     "dev": "concurrently \"vite\" \"json-server --watch json-server.json\"",
     "build": "tsc && vite build",
@@ -15,7 +15,6 @@
   "dependencies": {
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.5",
-    "@tanstack/react-query": "^4.29.17",
     "axios": "^1.4.0",
     "concurrently": "^8.1.0",
     "nanoid": "^4.0.2",
@@ -30,7 +29,6 @@
     "use-immer": "^0.9.0"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^4.29.9",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/swiper": "^6.0.0",
@@ -48,7 +46,6 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "gh-pages": "^5.0.0",
     "prettier": "2.8.8",
-    "rollup-plugin-copy": "^3.4.0",
     "sass": "^1.62.1",
     "typescript": "^5.0.2",
     "vite": "4.3.9"
