@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={client}>
-        <BrowserRouter>
+        <BrowserRouter basename='/react-sneakers/'>
           <App />
         </BrowserRouter>
       </QueryClientProvider>
