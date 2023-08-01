@@ -1,14 +1,24 @@
+// Импорты изображений в формате SVG
 import deleteIcon from '../../image/favorite-delete.svg';
+// Импорты стилей в CSS-модули
 import styles from './SideMenu.module.scss';
+// Импорты хуков из React
 import { useContext, useRef, useState } from 'react';
+// Импорт контекста
 import { AppContext } from '../../context/AppContext.ts';
+// Импорт компонентов CartList и CartInfo из соответствующих файлов
 import { CartList } from '../Carts/CartList.tsx';
 import { CartInfo } from '../Carts/CartInfo.tsx';
+// Импорт хука useOutsideClick
 import { useOutsideClick } from '../../hooks/useOutsideClick.ts';
+// Импорты хуков useDispatch и useSelector из React Redux
 import { useDispatch, useSelector } from 'react-redux';
+// Импорт типов AppDispatch и RootState из файла store
 import { AppDispatch, RootState } from '../../store';
+// Импорты экшенов и селекторов из соответствующих файлов для Redux
 import { POSTOrder } from '../../store/orderSlice.ts';
 import { clearCartStore, DELETECart } from '../../store/cartSlice.ts';
+// Импорт интерфейса ISneaker
 import { ISneaker } from '../../const/interfaces.ts';
 
 function SideMenu() {

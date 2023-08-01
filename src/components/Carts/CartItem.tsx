@@ -1,4 +1,7 @@
+// Импорт изображения в формате SVG для иконки "удалить из избранного"
 import deleteIcon from '../../image/favorite-delete.svg';
+
+// Импорт стилей в CSS-модули для компонента CartItem
 import styles from './CartItem.module.scss';
 
 interface ICartItem {

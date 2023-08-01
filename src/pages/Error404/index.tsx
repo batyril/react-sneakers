@@ -1,4 +1,6 @@
+// Импорт стилей
 import styles from './Error404.module.scss';
+// Компоненты
 import SideMenu from '../../components/SideMenu';
 import { Header } from '../../components/Header';
 

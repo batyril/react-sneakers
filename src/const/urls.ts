@@ -1,4 +1,4 @@
-const API_BASE = new URL('https://1dc4ea4e1a8207ff.mokky.ru');
+const API_BASE = new URL('http://localhost:3000');
 export const URLS = {
   FAVORITES: new URL('favorite', API_BASE),
   SNEAKERS: new URL('sneakers', API_BASE),

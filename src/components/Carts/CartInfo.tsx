@@ -1,8 +1,12 @@
+// Импорты стилей в CSS-модули для компонентов
 import styles from '../SideMenu/SideMenu.module.scss';
+import buttons from '../../scss/buttons.module.scss';
+
+// Импорты изображений в формате PNG и SVG
 import emptyIcon from '../../image/empty-cart.png';
 import arrowBack from '../../image/arrow-back.svg';
 import orderedImage from '../../image/ordered.png';
-import buttons from '../../scss/buttons.module.scss';
+
 interface ICartInfo {
   onClose: () => void;
   isOrdered: boolean;

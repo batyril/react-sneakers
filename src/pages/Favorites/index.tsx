@@ -1,8 +1,11 @@
+// Компоненты
 import { Header } from '../../components/Header';
 import SideMenu from '../../components/SideMenu';
 import { SneakerList } from '../../components/SneakerList';
 import { Blank } from '../../components/Blank';
+// Импорты из React Redux
 import { useSelector } from 'react-redux';
+// Импорт типа RootState из файла store
 import { RootState } from '../../store';
 
 export const Favorites = () => {

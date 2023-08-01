@@ -1,14 +1,23 @@
+// Импорты изображений в формате SVG для иконок
 import account from '../../image/account.svg';
 import openFavorites from '../../image/open-favorite.svg';
 import logo from '../../image/nike-logo.svg';
 import store from '../../image/store.svg';
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AppContext } from '../../context/AppContext.ts';
-import { useLocation } from 'react-router';
 import favoritePage from '../../image/delete-favorite.svg';
 import ordersPage from '../../image/ordersPage.svg';
+// Импорт хука useContext из React
+import { useContext } from 'react';
+// Импорт компонента Link из React Router
+import { Link } from 'react-router-dom';
+// Импорт контекста
+import { AppContext } from '../../context/AppContext.ts';
+// Импорт хука useLocation из React Router
+import { useLocation } from 'react-router';
+// Импорт стилей в CSS-модули для компонента Header
 import styles from './Header.module.scss';
+// Импорт констант из файла path.ts
+import { PATHS } from '../../const/path.ts';
+
 export const Header = () => {
   const location = useLocation();
   const isFavoritePage = location.pathname === '/favorite';
@@ -17,7 +26,7 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Link title='home' to='/'>
+      <Link title='home' to={PATHS.HOME}>
         <div className={styles.header__logo}>
           <img
             width='100px'
@@ -35,21 +44,17 @@ export const Header = () => {
         </div>
       </Link>
       <ul className={styles.header__menu}>
-        <li>
-          <img
-            onClick={() => (onOpen ? onOpen(true) : null)}
-            src={store}
-            alt='store '
-          />
+        <li onClick={() => (onOpen ? onOpen(true) : null)}>
+          <img src={store} alt='store ' />
           <span>{finalPrice} ₽</span>
         </li>
         <li>
-          <Link title='orders' to='/orders'>
+          <Link title='orders' to={PATHS.ORDERS}>
             <img src={isOrdersPage ? ordersPage : account} alt='account' />
           </Link>
         </li>
         <li>
-          <Link title='favorite' to='/favorite'>
+          <Link title='favorite' to={PATHS.FAVORITE}>
             <img
               src={isFavoritePage ? favoritePage : openFavorites}
               alt='favorites'

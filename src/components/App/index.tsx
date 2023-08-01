@@ -1,34 +1,40 @@
+// Импорты из внешних библиотек
 import { useImmer } from 'use-immer';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
+// Импорты страниц
 import { Home } from '../../pages/Home';
 import { Favorites } from '../../pages/Favorites';
 import { Orders } from '../../pages/Orders';
 import { Error404 } from '../../pages/Error404';
+import { Sneaker } from '../../pages/Sneaker';
 
+// Импорт контекста
 import { AppContext } from '../../context/AppContext.ts';
 
-import { ISneaker } from '../../const/interfaces.ts';
+// Импорт интерфейса
+import { PATHS } from '../../const/path.ts';
 
+// Импорт пользовательского хука
 import useFinalPrice from '../../hooks/useFinalPrice.ts';
 
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  DELETEFavorite,
-  fetchFavorite,
-  POSTFavorite,
-} from '../../store/favoriteSlice.ts';
+// Импорты Redux экшенов
+import { fetchFavorite } from '../../store/favoriteSlice.ts';
 
+// Импорты Redux экшенов для корзины
 import { AppDispatch, RootState } from '../../store';
-import { DELETECart, POSTCart, fetchCart } from '../../store/cartSlice.ts';
-import { useEffect } from 'react';
+
+import { fetchCart } from '../../store/cartSlice.ts';
+
+// Импорт Redux экшенов для списка кроссовок
 import { fetchSneakers } from '../../store/sneakersSlice.ts';
+
 export const App = () => {
   const [sideMenuOpened, setSideMenuOpened] = useImmer(false);
   const [searchName, setSearchName] = useImmer('');
-  const favoriteSneakers = useSelector(
-    (state: RootState) => state.favoriteDetails.favorite
-  );
+
   const cartSneakers = useSelector(
     (state: RootState) => state.cartDetails.cart
   );
@@ -41,60 +47,22 @@ export const App = () => {
     dispatch(fetchCart());
   }, [dispatch]);
 
-  const updateFavorite = async (sneaker: ISneaker) => {
-    const isInFavorites = favoriteSneakers.find(
-      (item) => item.parentID === sneaker.id
-    );
-    try {
-      if (isInFavorites) {
-        dispatch(DELETEFavorite(isInFavorites.id));
-      } else {
-        dispatch(POSTFavorite(sneaker));
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else if (typeof error === 'string') {
-        console.log(error);
-      }
-    }
-  };
-
-  const updateCart = async (sneaker: ISneaker) => {
-    const isInCart = cartSneakers.find((item) => item.parentID === sneaker.id);
-
-    try {
-      if (isInCart) {
-        dispatch(DELETECart(isInCart.id));
-      } else {
-        dispatch(POSTCart(sneaker));
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else if (typeof error === 'string') {
-        console.log(error);
-      }
-    }
-  };
-
   return (
     <AppContext.Provider
       value={{
         searchName,
         setSearchName,
-        updateFavorite,
-        updateCart,
         setSideMenuOpened,
         sideMenuOpened,
         finalPrice,
       }}
     >
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='favorite' element={<Favorites />}></Route>
-        <Route path='orders' element={<Orders />}></Route>
-        <Route path='*' element={<Error404 />}></Route>
+        <Route path={PATHS.HOME} element={<Home />}></Route>
+        <Route path={PATHS.FAVORITE} element={<Favorites />}></Route>
+        <Route path={PATHS.ORDERS} element={<Orders />}></Route>
+        <Route path={PATHS.ERROR} element={<Error404 />}></Route>
+        <Route path={PATHS.SNEAKER} element={<Sneaker />} />
       </Routes>
     </AppContext.Provider>
   );

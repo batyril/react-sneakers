@@ -1,10 +1,17 @@
+// Импорты стилей в CSS-модули
 import styles from '../SideMenu/SideMenu.module.scss';
-import { CartItem } from './CartItem.tsx';
-import arrow from '../../image/arrow.svg';
-import { ISneaker, SneakersType } from '../../const/interfaces.ts';
 import buttons from '../../scss/buttons.module.scss';
+// Импорт компонента
+import { CartItem } from './CartItem.tsx';
+// Импорт изображения в формате SVG для стрелки
+import arrow from '../../image/arrow.svg';
+// Импорт интерфейсов ISneaker и SneakersType из файла interfaces.ts
+import { ISneaker, SneakersType } from '../../const/interfaces.ts';
+// Импорт хука useContext из React
 import { useContext } from 'react';
+// Импорт контекста
 import { AppContext } from '../../context/AppContext.ts';
+
 interface ICartList {
   sneakers: SneakersType;
   onDeleteCart: (sneaker: ISneaker) => void;

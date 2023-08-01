@@ -1,8 +1,12 @@
+// Импорты изображений в формате SVG
 import searchIcon from '../../image/search.svg';
-import styles from './Search.module.scss';
-import { useContext } from 'react';
-import { AppContext } from '../../context/AppContext.ts';
 import deleteIcon from '../../image/favorite-delete.svg';
+// Импорт стилей в CSS-модули для компонентов
+import styles from './Search.module.scss';
+// Импорты хуков
+import { useContext } from 'react';
+// Импорт контекста
+import { AppContext } from '../../context/AppContext.ts';
 
 export const Search = () => {
   const { searchName, setSearchName } = useContext(AppContext);

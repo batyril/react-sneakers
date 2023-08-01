@@ -1,15 +1,17 @@
+// Компоненты
 import { Header } from '../../components/Header';
 import SideMenu from '../../components/SideMenu';
 import { CardItem } from '../../components/CardItem';
 import { Skeleton } from '../../components/Skeleton';
-
+import { Blank } from '../../components/Blank';
+// Интерфейсы
 import { IOrders, ISneaker } from '../../const/interfaces.ts';
-
+// Стили
 import style from './Orders.module.scss';
-
+// Хелперы
 import { getHoursHoursMinutes } from '../../helpers/getHoursHoursMinutes.ts';
 import { getDaysMonths } from '../../helpers/getDaysMonths.ts';
-import { Blank } from '../../components/Blank';
+// Реакт хуки и Redux
 import { useEffect } from 'react';
 import { fetchOrders } from '../../store/orderSlice.ts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +24,7 @@ export const Orders = () => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchOrders());
-  }, []);
+  }, [dispatch]);
 
   const renderItem = () => {
     return status === 'loading'
